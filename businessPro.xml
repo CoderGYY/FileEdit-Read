@@ -1,0 +1,2531 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Root  >
+    <!--说明：
+     cycle="true" 表明这是一个循环的item 会根据给的集合或数组长度 循环
+     isAlonePage:"true" 表明每次循环都是生成一个新的页面而不是拼接
+     cycleData 表明要循环的数组或者集合的JsonObject层级 比如 cycleData="data.docBodyJSON.ownerTeamMemberList"
+     footIndex 指明循环的下标 必须 按照name-1来算 比如所属打印序列的name=3 ,那么他的footIndex=2
+     cycleMacthValue  表明在循环时要判定为的数据   cycleMacthValue="e-1" /e-1,2  表明等于1时··· /等于1或2时
+     cycleMatchKey  表明循环时判定匹配的属性名
+     sepStart="、" sepEnd="。" 分别表示循环 开始，结束的分割符  没有则为""
+
+     onePage:在多页打印下， 表明属于同一页面 比如：onePage=1 表明属于第一种类容页的
+
+     单纯的要判定数据：
+     当前的例子即 data.docBodyJSON.currentMembers.name=data.docBodyJSON.ownerTeam.MasterName
+     matchIndex： 判定的下标
+     match2DataValue="data.docBodyJSON.ownerTeam.MasterName"  要判定 与之比较的 属性名
+     matchListData="data.docBodyJSON.currentMembers"          判定数据源
+     matchListDataKey="name"                                  自身的属性名 在数据源里
+
+     后缀说明
+     data.docBodyJSON.eaProject.eaAreaType-EnumEeaAreaType 表明某种枚举 注意必须有-Enum 后面可自行添加判定条件
+     data.docBodyJSON.eaProject.eaAreaType-date  表明是取的时间
+     data.docBodyJSON.eaProject.eaAreaType-dateNow  表明是取当前的时间
+    -->
+    <item  key="系统控制" disc="">
+        <item key="版本控制" >
+            <item key="目前版本">
+                <item>XX版本</item>
+                <!--<item>XX版本</item>-->
+            </item>
+        </item>
+        <item key="审批控制">
+            <item key="XX版本">
+                <item key="审批模式">
+                    <item>审批流</item>
+                </item>
+                <item key="审批视图">
+                    <!--<item>FCM_Common.common.views.forms.bisApprove_AP</item>-->
+                    <item>FCM_Common.common.views.forms.bisSummary</item>
+                </item>
+            </item>
+            <item key="XX版本">
+                <item key="审批模式">
+                    <item>工作流</item>
+                </item>
+                <item key="审批视图">
+                    <item>FCM_Common.common.views.forms.bisApprove_workFlow</item>
+                </item>
+            </item>
+        </item>
+    </item>
+
+    <item key="通用">
+        <item key="备案补正">
+            <item key="XX版本">
+                <item name="1">
+                    &lt;h1 align="center"&gt;备案补正事项告知书 &lt;/h1&gt;
+                    &lt;p&gt;&#xA0;&lt;/p&gt;
+                    &lt;p&gt;&#xA0;&lt;/p&gt;
+                    &lt;span&gt;&lt;u&gt;+data.bodyField1+ &lt;/u&gt;：&lt;u&gt; &lt;/u&gt;&lt;/span&gt; &lt;br /&gt;
+                    &lt;/p&gt;      你单位提交的&lt;u&gt; +data.bodyField9+  &lt;/u&gt;申请材料收悉。经核对，需要补正下列材料： &lt;/p&gt;
+                    &lt;ol&gt;
+                </item>
+                <item name="2" cycle="true" footIndex="1">
+                    &lt;li&gt;&lt;u&gt;+data.fileName+&lt;/u&gt;&lt;/li&gt;
+                </item>
+                <item name="3">
+                    &lt;/ol&gt;
+                </item>
+                <item name="4">
+                    &lt;br&gt;&lt;br /&gt; &lt;br&gt;&lt;br /&gt;
+                    &lt;p align="right"&gt;年      月     日 &lt;br /&gt;&lt;br /&gt;
+                    （备案机关印章） &lt;/p&gt;
+                    &lt;br&gt;
+                    &lt;p&gt;签收人签章：&lt;u&gt;                  &lt;/u&gt;
+                    时间：&lt;u&gt;             &lt;/u&gt;年&lt;u&gt;         &lt;/u&gt;月&lt;u&gt;        &lt;/u&gt;日 （此两项为打印后签收人手写签名） &lt;/p&gt;
+                    &lt;br&gt;
+                    &lt;p&gt;备注：一式两份，申请单位与备案机关各留存一份；
+                </item>
+            </item>
+        </item>
+    </item>
+
+        <item key="审批文件列表">
+            <item key="XX版本" id="mainFileTypeAndContent">
+                <item name="name1">物业管理区域备案申报表</item>
+                <item name="name2">建设单位营业执照正、副本</item>
+                <item name="name3">《建设单位用地规划许可证》及附图</item>
+                <item name="name4">建设项目修建性详细规划或者建设工程设计方案总平画图</item>
+                <item name="name5">物业管理区域内配置的物业管理用房预测绘或者实测绘报告</item>
+                <item name="name6">地名批复文件</item>
+            </item>
+        </item>
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">申报表</item>
+                <item name="name3" pageNum="1" copies="1" jsonRoot="false">申请报告</item>
+                <item name="name4" pageNum="1" copies="1" jsonRoot="false">基本情况表</item>
+                <item name="name5" pageNum="1" copies="1" jsonRoot="false">备案要件</item>
+            </item>
+        </item>
+        <item key="备案申报表">
+            <item key="申报表">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt;
+                        &lt;style id='style-recordBuild'&gt;
+                        .text-center{text-align: center; }
+                        .header-text-font{font-size: 40px;line-height: 2.2;}
+                        .record-apply { text-align: center; }
+                        .inner2Block{ display: block;}
+                        .block2Center { margin: 0 auto; }
+                        .block-head-size{ width: 80px; height: 20px;}
+                        .block-whole-size{width: 200px;height: 20px; }
+                        .block-underLine-size{ width: 120px;height: 20px;border-bottom: 1px solid black;}
+                        &lt;/style&gt;
+                        &lt;body&gt;&lt;div class='text-center'&gt;
+                        &lt;h1 style=margin-top: 100px&gt;XX市+data.cantonCode+物业管理区域备案 &lt;/h1&gt;
+                        &lt;p&gt;(建设单位申请)&lt;/p&gt;
+                        &lt;h1 class="record-apply header-text-font" style="margin-top:80px;"&gt;申&lt;br&gt;报&lt;br&gt;表&lt;/h1&gt; &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;申请单位&lt;/span&gt;
+                        &lt;span class="inner2Block" style="float: left;text-decoration: underline"&gt; +data.bodyField1+ &lt;/span&gt;
+                        &lt;p&gt;&#xA0;  &lt;/p&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;填报日期&lt;/span&gt;
+                        &lt;span class="inner2Block block-underLine-size" style="float: left;"&gt;&lt;/span&gt;
+                        &lt;p&gt;&#xA0; &lt;/p&gt;
+                        &lt;p  class="inner2Block block2Center block-whole-size" style=" margin-top:30px;"&gt;单位印章：&lt;/p&gt;
+                        &lt;br&gt;&lt;p style="margin-top:140px "&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;
+                        &lt;/div&gt;&lt;/body&gt;
+                        &lt;/html&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;p align="center"&gt;&lt;strong&gt;说&lt;/strong&gt;&lt;strong&gt;    &lt;/strong&gt;&lt;strong&gt;明&lt;/strong&gt;&lt;strong&gt; &lt;/strong&gt;&lt;/p&gt;
+                        &lt;ol&gt;  &lt;ol&gt;  &lt;ol&gt;
+                        &lt;li&gt;适用范围: 适用于XX市行政区域内的物业管理区域备案； &lt;/li&gt;
+                        &lt;li&gt;本表由申报备案的单位如实填写，申报单位对填写的内容的真实性负责。 &lt;/li&gt;
+                        &lt;li&gt;一个物业管理区域填写一份申请表，n个区域填写n份； &lt;/li&gt;
+                        &lt;li&gt;本表用蓝色或黑色墨水填写，字迹端正，清楚；也可打印； &lt;/li&gt;
+                        &lt;li&gt;企业填写时，如表格内不够填写，可另加附页，也可适当调整表格大小； &lt;/li&gt;
+                        &lt;/ol&gt;  &lt;/ol&gt;
+                        &lt;blockquote&gt;  &lt;p&gt;  本表统一以A4纸打印。  &lt;/p&gt;  &lt;/blockquote&gt; &lt;/ol&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="申请报告">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt; &lt;style&gt;
+                        body li{margin:10px;}
+                        body{line-height: 2;  }
+                        .recordReport_div1{ border:1px solid black ;}
+                        .recordReport_div2{ margin-top: 50px; padding: 8px 8px 120px 8px}
+                        .recordReport_ol{ margin-top: 30px; }
+                        &lt;/style&gt;
+                        &lt;div class="recordReport_div1" &gt;
+                        &lt;h1 align="center"&gt;物业管理区域备案申请报告 &lt;/h1&gt;
+                        &lt;div class="recordReport_div2" &gt;
+                        &lt;p&gt;&lt;u&gt;+data.docBodyJSON.approveDepartment+&lt;/u&gt;:
+                        &lt;br /&gt;
+                        &#xA0;&#xA0;&#xA0;&#xA0;按照《XX市物业管理暂行办法》第十一条，十二条等规定，我司将开发建设的
+                        &lt;u&gt;+data.docBodyJSON.eaProject.eaAreaName+&lt;/u&gt;
+                        划定为一个物业管理区域（详情见《物业管理区域基本情况》），现提交以下材料向贵局申请办理区域备案： &lt;/p&gt;
+                        &lt;ol class="recordReport_ol" &gt;
+                        &lt;li&gt;物业管理区域备案申报表； &lt;/li&gt;
+                        &lt;li&gt;建设单位营业执照正，副本； &lt;/li&gt;
+                        &lt;li&gt;《建设单位用地规划许可证》及附图； &lt;/li&gt;
+                        &lt;li&gt;建设项目修建性详细规划或者建设工程设计方案总平画图； &lt;/li&gt;
+                        &lt;li&gt;物业管理区域内配置的物业管理用房预测绘或者实测绘报告； &lt;/li&gt;
+                        &lt;li&gt;地名批复文件。 &lt;/li&gt;
+                        &lt;/ol&gt;  &lt;p&gt;专此报告。 &lt;/p&gt;
+                        &lt;br /&gt; &lt;br /&gt;
+                        &lt;p align="right"&gt;&#xA0;&#xA0;年  &#xA0;&#xA0;   月&#xA0;    日 &lt;br /&gt; （单位印章） &lt;/p&gt;  &lt;/div&gt; &lt;/div&gt;
+                        &lt;/html&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="基本情况表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;table width="100%" border="1" cellspacing="0" cellpadding="0"  style="text-align: center;padding:5px;height:95%"&gt;
+                        &lt;tr&gt; &lt;td colspan="5" &gt;&lt;strong align="center"&gt;物业管理区域基本情况 &lt;/strong&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;项目名称(标准地名)&lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="190" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaName+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td   colspan="2" &gt;&lt;p&gt;物业类型 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="190" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaType-EnumEaAreaType+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;详细地址 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaAddress+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  rowspan="2" valign="center"&gt;&lt;p&gt;四至范围 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2"  style="text-align: left;padding-left:5px"&gt;&lt;p&gt;东：+data.docBodyJSON.eaProject.fourToEast+ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2"  style="text-align: left;padding-left:5px"&gt;&lt;p&gt;南：+data.docBodyJSON.eaProject.fourToSouth+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;
+                        &lt;td colspan="2"  style="text-align: left;padding-left:5px"&gt;&lt;p&gt;西：+data.docBodyJSON.eaProject.fourToWest+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2"  style="text-align: left;padding-left:5px"&gt;&lt;p&gt;北：+data.docBodyJSON.eaProject.fourToNorth+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;项目建设单位名称 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt; +data.docBodyJSON.buildUnit.OrgName+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;法定代表人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt; +data.docBodyJSON.buildUnit.LegalRep+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;联系电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.buildUnit.LegalRepTel+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;办公地点 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.buildUnit.Address+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;办公电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.buildUnit.OfficePhone+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;联系人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.buildUnit.ContactPerson+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;联系人电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.buildUnit.ContactTel+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;项目总期数（期） &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.projectTotalPeriods+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;项目已开发期数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.projectPeriod+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;项目占地面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.projectArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;房屋建筑用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.buildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;绿化用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.greenArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;市政公建配套用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.municipalBuildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;其他用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.OthersArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;物业总建筑面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyBuildTotalArea+ 万㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;物业服务用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyServiceArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;公建配套设施 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.publicFacilityArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;多层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.multiStoreyArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;高层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.highStoreArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;独立式别墅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.singleVillaArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;办公楼，写字楼 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.officeArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;商业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.commerceArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;工业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.industArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+
+                        &lt;td  &gt;&lt;p&gt;学校 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.schoolArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;医院 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.hospitalArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+
+                        &lt;td  &gt;&lt;p&gt;停车场&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.parkingArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;其他建筑 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.othersBuildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td&gt;&lt;p&gt;总套数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.totalHouseNum+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;注：本业由申请人填写，字迹工整，如实填写，不得涂改。
+                    </item>
+                </item>
+            </item>
+            <item key="备案要件">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;div&gt;&lt;table border="1" height="90%" width="100%" cellspacing="0" cellpadding="5"&gt; &lt;tr align="center"&gt;
+                        &lt;td colspan="2"&gt;&lt;strong&gt;审批文件列表情况&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td width="42%"&gt;物业管理区域备案申报表&lt;/td&gt; &lt;td width="58%"&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;建设单位营业执照正、副本&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;《建设用地规划许可证》及附图&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;建设项目修建性详细规划或者建设工程设计方案总平图&lt;/td&gt; &lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;物业管理区域内配置的物业管理用房预测绘或者实测绘报告&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td&gt;地名批复文件&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td colspan="2" align="center"&gt;&lt;strong&gt;备案意见&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td height="40%"&gt;备案实施机关意见&lt;/td&gt;&lt;td align="bottom"&gt;&lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p style="text-align:center"&gt;  签字 ：&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0; &#xA0;&#xA0; &#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; 日 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;&lt;tr&gt;&lt;td&gt;物业管理区域备案回执&lt;/td&gt;&lt;td align="center"&gt;
+                        &lt;p&gt;______物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;
+                        &lt;p&gt; 备案时间 ：  &#xA0; &#xA0;  &#xA0;&#xA0; 年 &#xA0;&#xA0;   &#xA0; &#xA0; 月   &#xA0; &#xA0; &#xA0;  日&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;/table&gt;&lt;div&gt; &lt;ol&gt; &lt;span&gt;备注：&lt;/span&gt;&lt;li&gt;本页由备案登记机关填写，字迹工整，如实填写，不得涂改;&lt;/li&gt;
+                        &lt;li&gt;审批文件列表情况的下划线处填写“是”或者“不”。&lt;/li&gt; &lt;/ol&gt;&lt;/div&gt;&lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item key="备案回执" >
+            <item key="XX版本" jsonRoot="false">
+                <item name="name1">
+                    &lt;table width="100%" height="763" border="1" cellpadding="0" cellspacing="0"&gt;
+                    &lt;tr&gt;
+                    &lt;td width="100%" valign="top"&gt;&lt;p align="right"&gt;&lt;/p&gt;
+                    &lt;p align="right"&gt;&lt;u&gt;             &lt;/u&gt;物区备[              ] 第+data.docCode+号 &lt;/p&gt;
+
+                    &lt;h2 align="center"&gt;&lt;strong&gt;物业务管理区域备案回执&lt;/strong&gt;&lt;strong&gt;  &lt;/strong&gt;&lt;/h2&gt;
+                    &lt;span&gt;&lt;u&gt;+data.docBodyJSON.buildUnit.OrgName+&lt;/u&gt;：&lt;/span&gt; &lt;br /&gt;
+                    &lt;p&gt;
+                          你司申请坐落于&lt;u&gt; +data.docBodyJSON.eaProject.eaAreaAddress+ &lt;/u&gt;的&lt;u&gt; +data.docBodyJSON.eaProject.eaAreaName+ &lt;/u&gt;的物业管理区域备案材料收悉。备案主要内容如下： &lt;/p&gt;
+                    &lt;ol&gt;
+                    &lt;li&gt;物业类型：&lt;u&gt;+data.docBodyJSON.eaProject.eaAreaType-EnumEaAreaType+&lt;/u&gt;； &lt;/li&gt;
+                    &lt;li style="margin:10px 0"&gt;物业总建筑物面积：&lt;u&gt; +data.docBodyJSON.eaProject.realtyBuildTotalArea+   &lt;/u&gt;㎡； &lt;/li&gt;
+                    &lt;li&gt;物业四至范围： &lt;/li&gt;
+                    &lt;/ol&gt;
+                    &lt;p&gt;      东：&lt;u&gt;+data.docBodyJSON.eaProject.fourToEast+ &lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      西：&lt;u&gt;+data.docBodyJSON.eaProject.fourToWest+&lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      南：&lt;u&gt;+data.docBodyJSON.eaProject.fourToSouth+ &lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      北：&lt;u&gt;+data.docBodyJSON.eaProject.fourToNorth+ &lt;/u&gt;&lt;/p&gt;
+                    &lt;br&gt;&lt;br /&gt;
+                    &lt;p align="right"&gt;年      月     日 &lt;br /&gt;&lt;br /&gt;
+                    （备案机关印章） &lt;/p&gt;
+                    &lt;br&gt;&lt;br /&gt;
+                    &lt;p&gt;签收人签章：&lt;u&gt;          &lt;/u&gt;时间：&lt;u&gt;             &lt;/u&gt;年&lt;u&gt;         &lt;/u&gt;月&lt;u&gt;        &lt;/u&gt;日 （此两项为打印后签收人手写签名） &lt;/p&gt;
+                    &lt;br&gt;
+                    &lt;p&gt;备注：1. 一式两份，申请单位与备案机关各留存一份； &lt;br /&gt;
+                    2． 物业类型分为：多层住宅，高层住宅，别墅，办公楼，工业厂房及其他物业。混合型共五中。 &lt;/p&gt;
+                    &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;/table&gt;
+                </item>
+            </item>
+        </item>
+    </item>
+    <item   key="2" disc="物业管理区域备案" belong="物业服务企业"> 
+        <item key="审批文件列表">
+            <item key="XX版本">
+                <item name="name1">物业管理区域备案申报表</item>
+                <item name="name2">物业服务合同</item>
+                <item name="name3">物业服务企业资源证书正，副本</item>
+                <item name="name4">《建设用地规划许可证》</item>
+                <item name="name5">建设项目修建性详细规划或者建设工程设计方案总平画图</item>
+                <item name="name6">物业管理用房坐落位置，建筑面积</item>
+                <item name="name7">地名批复文件</item>
+            </item>
+        </item>
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">申报表</item>
+                <item name="name3" pageNum="1" copies="1" jsonRoot="false">申请报告</item>
+                <item name="name4" pageNum="1" copies="1" jsonRoot="false">基本情况表</item>
+                <item name="name5" pageNum="1" copies="1" jsonRoot="false">备案要件</item>
+            </item>
+
+        </item>
+        <item key="备案申报表">
+            <item key="申报表">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt;
+                        &lt;style id="style-recordBuild"&gt;
+                        .text-center{text-align: center; }
+                        .header-text-font{font-size: 40px;line-height: 2.2;}
+                        .record-apply { text-align: center; }
+                        .inner2Block{ display: block;}
+                        .block2Center { margin: 0 auto; }
+                        .block-head-size{ width: 80px; height: 20px;}
+                        .block-whole-size{width: 200px;height: 20px; }
+                        .block-underLine-size{ width: 120px;height: 20px;border-bottom: 1px solid black;}
+                        &lt;/style&gt;
+                        &lt;body&gt;&lt;div class='text-center'&gt;
+                        &lt;h1 style=margin-top: 100px&gt;XX市+data.cantonCode+物业管理区域备案 &lt;/h1&gt;
+                        &lt;p&gt;(物业服务企业申请)&lt;/p&gt;
+                        &lt;h1 class="record-apply header-text-font" style="margin-top:80px;"&gt;申&lt;br&gt;报&lt;br&gt;表&lt;/h1&gt; &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;申请单位&lt;/span&gt;
+                        &lt;span class="inner2Block" style="float: left;text-decoration: underline"&gt; +data.bodyField1+ &lt;/span&gt;
+                        &lt;p&gt;&#xA0;  &lt;/p&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;填报日期&lt;/span&gt;
+                        &lt;span class="inner2Block block-underLine-size" style="float: left;"&gt;&lt;/span&gt;
+                        &lt;p&gt;&#xA0; &lt;/p&gt;
+                        &lt;p  class="inner2Block block2Center block-whole-size" style=" margin-top:30px;"&gt;单位印章：&lt;/p&gt;
+                        &lt;br&gt;&lt;p style="margin-top:140px "&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;
+                        &lt;/div&gt;&lt;/body&gt;
+                        &lt;/html&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;p align="center"&gt;&lt;strong&gt;说&lt;/strong&gt;&lt;strong&gt;    &lt;/strong&gt;&lt;strong&gt;明&lt;/strong&gt;&lt;strong&gt; &lt;/strong&gt;&lt;/p&gt;
+                        &lt;ol&gt;  &lt;ol&gt;   &lt;ol&gt;
+                            &lt;li&gt;适用范围: 适用于XX市行政区域内的物业管理区域备案； &lt;/li&gt;
+                            &lt;li&gt;本表由申报备案的单位如实填写，申报单位对填写的内容的真实性负责。 &lt;/li&gt;
+                            &lt;li&gt;物业服务企业需保证企业信用系统上填报的数据与纸张报送的资料相一致； &lt;/li&gt;
+                            &lt;li&gt;一个物业管理区域填写一份申请表，n个区域填写n份； &lt;/li&gt;
+                            &lt;li&gt;本表用蓝色或黑色墨水填写，字迹端正，清楚；也可打印； &lt;/li&gt;
+                            &lt;li&gt;企业填写时，如表格内不够填写，可另加附页，也可适当调整表格大小； &lt;/li&gt;
+                            &lt;li&gt;本表统一以A4纸打印。 &lt;/li&gt;
+                        &lt;/ol&gt;
+                        &lt;/ol&gt;  &lt;/ol&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="申请报告">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt; &lt;style&gt;
+                        body li{margin:10px;}
+                        body{line-height: 2;  }
+                        .recordReport_div1{ border:1px solid black ;}
+                        .recordReport_div2{ margin-top: 50px; padding: 8px 8px 120px 8px}
+                        .recordReport_ol{ margin-top: 30px; }
+                        &lt;/style&gt;
+                        &lt;div class="recordReport_div1"&gt; &lt;h1 align="center"&gt;物业管理区域备案申请报告 &lt;/h1&gt; &lt;div class="recordReport_div2"&gt;
+                        &lt;p&gt;&lt;u&gt;+data.docBodyJSON.approveDepartment+&lt;/u&gt;:
+                        &lt;br&gt;
+                        &#xA0;&#xA0;&#xA0;&#xA0; 按照《XX市物业管理暂行办法》第十一条，十三条等规定，我司将已实施物业管理但未办理物业管理区域备案手续的
+                        &lt;u&gt;+data.docBodyJSON.eaProject.eaAreaName+&lt;/u&gt;
+                        划定为一个物业管理区域（详情见《物业管理区域基本情况》），现提交以下材料向贵局申请办理区域备案： &lt;/p&gt;
+                        &lt;ol class="recordReport_ol"&gt;
+                        &lt;li&gt;物业管理区域备案申报表&lt;/li&gt;
+                        &lt;li&gt;物业服务合同    &lt;/li&gt;
+                        &lt;li&gt;物业服务企业资源证书正，副本 &lt;/li&gt;
+                        &lt;li&gt;《建设用地规划许可证》  &lt;/li&gt;
+                        &lt;li&gt;建设项目修建性详细规划或者建设工程设计方案总平画图 &lt;/li&gt;
+                        &lt;li&gt;物业管理用房坐落位置，建筑面积&lt;/li&gt;
+                        &lt;li&gt;地名批复文件 &lt;/li&gt;
+                        &lt;/ol&gt;  &lt;p&gt;专此报告。 &lt;/p&gt;
+                        &lt;p align="right"&gt;&#xA0;&#xA0;年  &#xA0;&#xA0;   月&#xA0;    日 &lt;br /&gt; （单位印章） &lt;/p&gt;  &lt;/div&gt; &lt;/div&gt;
+                        &lt;/html&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="基本情况表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;table width="100%" border="1" cellspacing="0" cellpadding="0"  style="text-align: center;padding:5px;height:95%"&gt;
+                        &lt;tr&gt; &lt;td  colspan="6" &gt;&lt;strong align="center"&gt;物业管理区域基本情况 &lt;/strong&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;项目名称（标准地名） &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  width="190"&gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaName+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;物业类型 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" width="190"&gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaType-EnumEaAreaType+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td  &gt;&lt;p&gt;详细地址 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaAddress+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr &gt; &lt;td  rowspan="2" &gt;&lt;p&gt;四至范围 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2"  style="text-align: left;padding-left:5px" &gt;&lt;p&gt;东：+data.docBodyJSON.eaProject.fourToEast+ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" style="text-align: left;padding-left:5px" &gt;&lt;p&gt;南：+data.docBodyJSON.eaProject.fourToSouth+ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr &gt; &lt;td  colspan="2" style="text-align: left;padding-left:5px"&gt;&lt;p&gt;西：+data.docBodyJSON.eaProject.fourToWest+  &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" style="text-align: left;padding-left:5px" &gt;&lt;p&gt;北：+data.docBodyJSON.eaProject.fourToNorth+  &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;项目建设单位名称 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.buildUnitOrgName+&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td  &gt;&lt;p&gt;项目总期数（期） &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.projectTotalPeriods+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;项目已开发期数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.projectPeriod+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;物业服务企业名称 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.OrgName+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;法定代表人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.LegalRep+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;联系电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.LegalRepTel+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;资质等级 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.LicenseLevel+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;资质证号 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td&gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.LicenseNo+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;办公地点 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td&gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.Address+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;办公电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td&gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.OfficePhone+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;&lt;tr&gt;
+                        &lt;td &gt;&lt;p&gt;项目联系人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyManage+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;联系人电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyManageCall+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;项目占地面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.projectArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;房屋建筑用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.buildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;绿化用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.greenArea+ ㎡ &lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;市政公建配套用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.municipalBuildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;其他用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.OthersArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;&lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;物业总建筑面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyBuildTotalArea+ 万㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;物业服务用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyServiceArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;公建配套设施 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.publicFacilityArea+ ㎡  &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;多层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.multiStoreyArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;高层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.highStoreArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;独立式别墅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.singleVillaArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;办公楼，写字楼 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.officeArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;商业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.commerceArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;工业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.industArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;学校 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.schoolArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;医院 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.hospitalArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;停车场&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.parkingArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;其他建筑 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.othersBuildArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;总套数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.totalHouseNum+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt; &lt;/table&gt;
+                        &lt;p&gt;注：本业由申请人填写，字迹工整，如实填写，不得涂改。 &lt;/p&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="备案要件">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;div&gt;&lt;table border="1" height="90%" width="100%" cellspacing="0" cellpadding="5"&gt; &lt;tr align="center"&gt;
+                        &lt;td colspan="2"&gt;&lt;strong&gt;备案要件情况&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td width="42%"&gt;物业管理区域备案申报表&lt;/td&gt; &lt;td width="58%"&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;物业服务合同&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;物业服务企业资质证书正、副本&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;《建设用地规划许可证》及附图&lt;/td&gt; &lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;建设项目修建性详细规划或者建设工程设计方案总平面图&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td&gt;物业管理用房坐落位置、建筑面积&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td&gt;市或县级市政府核准的地名批复文件&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+
+                        &lt;tr&gt;&lt;td colspan="2" align="center"&gt;&lt;strong&gt;备案意见&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td height="40%"&gt;备案实施机关意见&lt;/td&gt;&lt;td align="bottom"&gt;&lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p style="text-align:center"&gt;  签字 ：&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0; &#xA0;&#xA0; &#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; 日 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;&lt;tr&gt;&lt;td&gt;物业管理区域备案回执&lt;/td&gt;&lt;td align="center"&gt;
+                        &lt;p&gt;______物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;
+                        &lt;p&gt; 备案时间 ：  &#xA0; &#xA0;  &#xA0;&#xA0; 年 &#xA0;&#xA0;   &#xA0; &#xA0; 月   &#xA0; &#xA0; &#xA0;  日&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;/table&gt;&lt;div&gt; &lt;ol&gt; &lt;span&gt;备注：&lt;/span&gt;&lt;li&gt;本页由备案登记机关填写，字迹工整，如实填写，不得涂改;&lt;/li&gt;
+                        &lt;li&gt;备案要件情况的下划线处填写“是”或者“不”。&lt;/li&gt; &lt;/ol&gt;&lt;/div&gt;&lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item  key="备案回执">
+            <item key="XX版本" jsonRoot="false">
+                <item name="1">
+                    &lt;table width="100%" height="763" border="1" cellpadding="0" cellspacing="0"&gt;
+                    &lt;tr&gt;
+                    &lt;td width="100%" valign="top"&gt;&lt;p align="right"&gt;&lt;/p&gt;
+                    &lt;p align="right"&gt;&lt;u&gt;             &lt;/u&gt;物区备[              ] 第+data.docCode+号 &lt;/p&gt;
+
+                    &lt;h2 align="center"&gt;&lt;strong&gt;物业务管理区域备案回执&lt;/strong&gt;&lt;strong&gt;  &lt;/strong&gt;&lt;/h2&gt;
+                    &lt;span&gt;&lt;u&gt;+data.docBodyJSON.realtyMgeCom.OrgName+&lt;/u&gt;：&lt;/span&gt; &lt;br /&gt;
+                    &lt;p&gt;
+                          你司申请坐落于&lt;u&gt; +data.docBodyJSON.eaProject.eaAreaAddress+ &lt;/u&gt;的&lt;u&gt; +data.docBodyJSON.eaProject.eaAreaName+ &lt;/u&gt;的物业管理区域备案材料收悉。备案主要内容如下： &lt;/p&gt;
+                    &lt;ol&gt;
+                    &lt;li&gt;物业类型：&lt;u&gt;+data.docBodyJSON.eaProject.eaAreaType-EnumEaAreaType+&lt;/u&gt;； &lt;/li&gt;
+                    &lt;li style="margin:10px 0"&gt;物业总建筑物面积：&lt;u&gt; +data.docBodyJSON.eaProject.realtyBuildTotalArea+   &lt;/u&gt;㎡； &lt;/li&gt;
+                    &lt;li&gt;物业四至范围： &lt;/li&gt;
+                    &lt;/ol&gt;
+                    &lt;p&gt;      东：&lt;u&gt;+data.docBodyJSON.eaProject.fourToEast+ &lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      西：&lt;u&gt;+data.docBodyJSON.eaProject.fourToWest+&lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      南：&lt;u&gt;+data.docBodyJSON.eaProject.fourToSouth+ &lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      北：&lt;u&gt;+data.docBodyJSON.eaProject.fourToNorth+ &lt;/u&gt;&lt;/p&gt;
+                    &lt;br&gt;&lt;br /&gt;
+                    &lt;p align="right"&gt;年      月     日 &lt;br /&gt;&lt;br /&gt;
+                    （备案机关印章） &lt;/p&gt;
+                    &lt;br&gt;&lt;br /&gt;
+                    &lt;p&gt;签收人签章：&lt;u&gt;          &lt;/u&gt;时间：&lt;u&gt;             &lt;/u&gt;年&lt;u&gt;         &lt;/u&gt;月&lt;u&gt;        &lt;/u&gt;日 （此两项为打印后签收人手写签名） &lt;/p&gt;
+                    &lt;br&gt;
+                    &lt;p&gt;备注：1. 一式两份，申请单位与备案机关各留存一份； &lt;br /&gt;
+                    2． 物业类型分为：多层住宅，高层住宅，别墅，办公楼，工业厂房及其他物业。混合型共五中。 &lt;/p&gt;
+                    &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;/table&gt;
+                </item>
+            </item>
+        </item>
+    </item>
+
+        <item key="审批文件列表">
+            <item key="XX版本">
+                <item name="name1">物业管理区域备案申报表</item>
+                <item name="name2">物业管理区域四至范围说明及附图</item>
+                <item name="name3">确定物业管理区域的理由和依据</item>
+            </item>
+        </item>
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">申报表</item>
+                <item name="name2" pageNum="1" copies="1" jsonRoot="false">申报表说明</item>
+                <item name="name3" pageNum="1" copies="1" jsonRoot="true">申请报告</item>
+                <item name="name4" pageNum="1" copies="1" jsonRoot="true">基本情况表</item>
+                <item name="name5" pageNum="1" copies="1" jsonRoot="false">备案要件</item>
+            </item>
+
+        </item>
+        <item key="备案申报表">
+            <item key="申报表">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt;
+                        &lt;style id="style-recordBuild"&gt;
+                        .text-center{text-align: center; }
+                        .header-text-font{font-size: 40px;line-height: 2.2;}
+                        .record-apply { text-align: center; }
+                        .inner2Block{ display: block;}
+                        .block2Center { margin: 0 auto; }
+                        .block-head-size{ width: 80px; height: 20px;}
+                        .block-whole-size{width: 200px;height: 20px; }
+                        .block-underLine-size{ width: 120px;height: 20px;border-bottom: 1px solid black;}
+                        &lt;/style&gt;
+                        &lt;body&gt;&lt;div class='text-center'&gt;
+                        &lt;h1 style=margin-top: 100px&gt;XX市+data.cantonCode+物业管理区域备案 &lt;/h1&gt;
+                        &lt;p&gt;(街道办镇人民政府申请)&lt;/p&gt;
+                        &lt;h1 class="record-apply header-text-font" style="margin-top:80px;"&gt;申&lt;br&gt;报&lt;br&gt;表&lt;/h1&gt; &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;申请单位&lt;/span&gt;
+                        &lt;span class="inner2Block" style="float: left;text-decoration: underline"&gt; +data.bodyField1+ &lt;/span&gt;
+                        &lt;p&gt;&#xA0;  &lt;/p&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;填报日期&lt;/span&gt;
+                        &lt;span class="inner2Block block-underLine-size" style="float: left;"&gt;&lt;/span&gt;
+                        &lt;p&gt;&#xA0; &lt;/p&gt;
+                        &lt;p  class="inner2Block block2Center block-whole-size" style=" margin-top:30px;"&gt;单位印章：&lt;/p&gt;
+                        &lt;br&gt;&lt;p style="margin-top:140px "&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;
+                        &lt;/div&gt;&lt;/body&gt;
+                        &lt;/html&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;p align="center"&gt;&lt;strong&gt;说&lt;/strong&gt;&lt;strong&gt;    &lt;/strong&gt;&lt;strong&gt;明&lt;/strong&gt;&lt;strong&gt; &lt;/strong&gt;&lt;/p&gt;
+                        &lt;ol&gt;  &lt;ol&gt;  &lt;ol&gt;
+                        &lt;li&gt;适用范围: 适用于XX市行政区域内的物业管理区域备案； &lt;/li&gt;
+                        &lt;li&gt;本表由申报备案的单位如实填写，申报单位对填写的内容的真实性负责。 &lt;/li&gt;
+                        &lt;li&gt;一个物业管理区域填写一份申请表，n个区域填写n份； &lt;/li&gt;
+                        &lt;li&gt;本表用蓝色或黑色墨水填写，字迹端正，清楚；也可打印； &lt;/li&gt;
+                        &lt;li&gt;企业填写时，如表格内不够填写，可另加附页，也可适当调整表格大小； &lt;/li&gt;
+                        &lt;/ol&gt;  &lt;/ol&gt;
+                        &lt;blockquote&gt;  &lt;p&gt;  本表统一以A4纸打印。  &lt;/p&gt;  &lt;/blockquote&gt; &lt;/ol&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="申报表说明">
+                <item key="XX版本">
+                    <item name="name1" >
+                    </item>
+                </item>
+            </item>
+            <item key="申请报告">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt; &lt;style&gt;
+                        body li{margin:10px;}
+                        body{line-height: 2;  }
+                        .recordReport_div1{ border:1px solid black ;}
+                        .recordReport_div2{ margin-top: 50px; padding: 8px 8px 120px 8px}
+                        .recordReport_ol{ margin-top: 30px; }
+                        &lt;/style&gt;
+                        &lt;div  class="recordReport_div1"&gt;
+                        &lt;p align="center"&gt;物业管理区域备案申请报告 &lt;/p&gt;
+                        &lt;div class="recordReport_div2"&gt;
+                        &lt;p&gt;  &lt;u&gt;+data.docBodyJSON.approveDepartment+&lt;/u&gt;:
+                        &lt;br /&gt;&#xA0;&#xA0;&#xA0;&#xA0; 按照《XX市物业管理暂行办法》第十一条，十四条等规定，我单位经征求相关业主意见，
+                        将没有实施物业管理且没有办理物业管理区域备案的&lt;u&gt;+data.eaProject.eaAreaName+ &lt;/u&gt;
+                        确定为一个物业管理区域（详情见《物业管理区域基本情况》），现提交以下材料向贵局申请办理区域备案： &lt;/p&gt;
+                        &lt;ol class="recordReport_ol"&gt;
+                        &lt;li&gt;物业管理区域备案申报表&lt;/li&gt;
+                        &lt;li&gt;物业管理区域四至范围说明及附图&lt;/li&gt;
+                        &lt;li&gt;确定物业管理区域的理由和依据&lt;/li&gt;
+                        &lt;/ol&gt;  &lt;p&gt;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;专此报告。 &lt;/p&gt;
+                        &lt;p align="right"&gt;&#xA0;&#xA0;年  &#xA0;&#xA0;&#xA0;   月&#xA0; &#xA0;  &#xA0; 日 &lt;br /&gt; （单位印章） &lt;/p&gt;  &lt;/div&gt; &lt;/div&gt;
+                        &lt;/html&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="基本情况表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;table width="100%" border="1" cellspacing="0" cellpadding="0" style=" text-align:center;height:95%"&gt;
+                        &lt;tr&gt; &lt;td colspan="5" &gt;&lt;strong align="center"&gt;物业管理区域基本情况 &lt;/strong &gt;&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td width="174"  &gt;&lt;p&gt;项目名称（标准地名） &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="219"  &gt;&lt;p&gt;+data.eaProject.eaAreaName+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;物业类型 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="204"  &gt;&lt;p&gt;+data.eaProject.eaAreaType-EnumEaAreaType+&lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;详细地址 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.eaProject.eaAreaAddress+&lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  rowspan="2" valign="center"&gt;&lt;p&gt;四至范围 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2"  style='text-align: left;padding-left:5px'&gt;&lt;p&gt;东：+data.eaProject.fourToEast+ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2"  style='text-align: left;padding-left:5px'&gt;&lt;p&gt;南： +data.eaProject.fourToSouth+&lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td colspan="2"  style='text-align: left;padding-left:5px'&gt;&lt;p&gt;西： +data.eaProject.fourToWest+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2"  style='text-align: left;padding-left:5px'&gt;&lt;p&gt;北： +data.eaProject.fourToNorth+&lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;街道办或镇人民政府名称&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.streetName+&lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;办公地点 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.streetAddress+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;办公电话&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.officePhone+&lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;联系人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.contactPerson+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;联系人电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.contactTel+&lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;项目占地面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.eaProject.projectArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;房屋建筑用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.buildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;绿化用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt; +data.eaProject.greenArea+㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;市政公建配套用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt; +data.eaProject.municipalBuildArea+㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;其他用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.OthersArea+㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;物业总建筑面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.eaProject.realtyBuildTotalArea+㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;物业服务用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.realtyServiceArea+㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;公建配套设施 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt; +data.eaProject.publicFacilityArea+㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt; &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;多层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.multiStoreyArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;高层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt; +data.eaProject.highStoreArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;独立式别墅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.singleVillaArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;办公楼，写字楼 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.officeArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;商业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.commerceArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;工业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.industArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;停车场&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.parkingArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="2" &gt;&lt;p&gt;其他建筑 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.othersBuildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td  &gt;&lt;p&gt;总套数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td colspan="4" &gt;&lt;p&gt;+data.eaProject.totalHouseNum+ &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;&lt;/table&gt;
+                        注：本业由申请人填写，字迹工整，如实填写，不得涂改。
+                    </item>
+                </item>
+            </item>
+            <item key="备案要件">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;div&gt;&lt;table height="90%" width="100%" border="1" cellspacing="0" cellpadding="5"&gt; &lt;tr align="center"&gt;
+                        &lt;td colspan="2"&gt;&lt;strong&gt;备案要件情况&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td width="42%"&gt;物业管理区域备案申报表&lt;/td&gt; &lt;td width="58%"&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;物业管理区域四至范围说明及附图&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;确定物业管理区域的理由和依据&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td colspan="2" align="center"&gt;&lt;strong&gt;备案意见&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td height="40%"&gt;备案实施机关意见&lt;/td&gt;&lt;td align="bottom"&gt;&lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p style="text-align:center"&gt;  签字 ：&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0; &#xA0;&#xA0; &#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; 日 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;&lt;tr&gt;&lt;td&gt;物业管理区域备案回执&lt;/td&gt;&lt;td align="center"&gt;
+                        &lt;p&gt;______物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;
+                        &lt;p&gt; 备案时间 ：  &#xA0; &#xA0;  &#xA0;&#xA0; 年 &#xA0;&#xA0;   &#xA0; &#xA0; 月   &#xA0; &#xA0; &#xA0;  日&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;/table&gt;&lt;div&gt; &lt;ol&gt; &lt;span&gt;备注：&lt;/span&gt;&lt;li&gt;本页由备案登记机关填写，字迹工整，如实填写，不得涂改;&lt;/li&gt;
+                        &lt;li&gt;备案要件情况的下划线处填写“是”或者“不”。&lt;/li&gt; &lt;/ol&gt;&lt;/div&gt;&lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item  key="备案回执">
+            <item key="XX版本" >
+                <item name="1">
+                    &lt;table width="100%" height="763" border="1" cellpadding="0" cellspacing="0"&gt;
+                    &lt;tr&gt;
+                    &lt;td width="100%" valign="top"&gt;&lt;p align="right"&gt;&lt;/p&gt;
+                    &lt;p align="right"&gt;&lt;u&gt;             &lt;/u&gt;物区备[              ] 第+data.docCode+号 &lt;/p&gt;
+
+                    &lt;h2 align="center"&gt;&lt;strong&gt;物业务管理区域备案回执&lt;/strong&gt;&lt;strong&gt;  &lt;/strong&gt;&lt;/h2&gt;
+                    &lt;span&gt;&lt;u&gt;+data.docBodyJSON.streetName+&lt;/u&gt;：&lt;/span&gt; &lt;br /&gt;
+                    &lt;p&gt;
+                          你单位申请坐落于&lt;u&gt; +data.docBodyJSON.eaProject.eaAreaAddress+ &lt;/u&gt;的&lt;u&gt;
+                    +data.docBodyJSON.eaProject.eaAreaName+ &lt;/u&gt;的物业管理区域备案材料收悉。备案主要内容如下： &lt;/p&gt;
+                    &lt;ol&gt;
+                    &lt;li&gt;物业类型：&lt;u&gt;+data.docBodyJSON.eaProject.eaAreaType-EnumEaAreaType+&lt;/u&gt;； &lt;/li&gt;
+                    &lt;li style="margin:10px 0"&gt;物业总建筑物面积：&lt;u&gt; +data.docBodyJSON.eaProject.realtyBuildTotalArea+   &lt;/u&gt;㎡； &lt;/li&gt;
+                    &lt;li&gt;物业四至范围： &lt;/li&gt;
+                    &lt;/ol&gt;
+                    &lt;p&gt;      东：&lt;u&gt;+data.docBodyJSON.eaProject.fourToEast+ &lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      西：&lt;u&gt;+data.docBodyJSON.eaProject.fourToWest+&lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      南：&lt;u&gt;+data.docBodyJSON.eaProject.fourToSouth+ &lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      北：&lt;u&gt;+data.docBodyJSON.eaProject.fourToNorth+ &lt;/u&gt;&lt;/p&gt;
+                    &lt;br&gt;&lt;br /&gt;
+                    &lt;p align="right"&gt;年      月     日 &lt;br /&gt;&lt;br /&gt;
+                    （备案机关印章） &lt;/p&gt;
+                    &lt;br&gt;&lt;br /&gt;
+                    &lt;p&gt;签收人签章：&lt;u&gt;          &lt;/u&gt;时间：&lt;u&gt;             &lt;/u&gt;年&lt;u&gt;         &lt;/u&gt;月&lt;u&gt;        &lt;/u&gt;日 （此两项为打印后签收人手写签名） &lt;/p&gt;
+                    &lt;br&gt;
+                    &lt;p&gt;备注：1. 一式两份，申请单位与备案机关各留存一份； &lt;br /&gt;
+                    2． 物业类型分为：多层住宅，高层住宅，别墅，办公楼，工业厂房及其他物业。混合型共五中。 &lt;/p&gt;
+                    &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;/table&gt;
+                </item>
+            </item>
+        </item>
+    </item>
+
+    <item   key="4" disc="物业区域分割备案" belong="物业服务企业"> 
+        <item key="审批文件列表">
+            <item key="XX版本">
+                <item name="name1">物业管理区域备案申报表</item>
+                <item name="name2">分割后各物业管理区域四至范围说明及附图</item>
+                <item name="name3">分割方案</item>
+                <item name="name4">已分割各物业管理区域内专有部分占建筑物总面积过半数的业主且占总人数过半的业主同意分割方案的证明材料</item>
+            </item>
+        </item>
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">申报表</item>
+                <item name="name2" pageNum="1" copies="1" jsonRoot="true">申请报告</item>
+                <item name="name3" pageNum="1" copies="1" jsonRoot="true">基本情况表</item>
+                <item name="name4" pageNum="1" copies="1" jsonRoot="false">备案要件</item>
+            </item>
+        </item>
+        <item key="备案申报表">
+            <item key="申报表">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt;
+                        &lt;style id='style-recordBuild'&gt;
+                        .text-center{text-align: center; }
+                        .header-text-font{font-size: 40px;line-height: 2.2;}
+                        .record-apply { text-align: center; }
+                        .inner2Block{ display: block;}
+                        .block2Center { margin: 0 auto; }
+                        .block-head-size{ width: 80px; height: 20px;}
+                        .block-whole-size{width: 200px;height: 20px; }
+                        .block-underLine-size{ width: 120px;height: 20px;border-bottom: 1px solid black;}
+                        &lt;/style&gt;
+                        &lt;body&gt;&lt;div class='text-center'&gt;
+                        &lt;h1 style=margin-top: 100px&gt;XX市+data.cantonCode+物业管理区域备案 &lt;/h1&gt;
+                        &lt;p&gt;(分割物业管理区域备案)&lt;/p&gt;
+                        &lt;h1 class="record-apply header-text-font" style="margin-top:80px;"&gt;申&lt;br&gt;报&lt;br&gt;表&lt;/h1&gt; &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;申请单位&lt;/span&gt;
+                        &lt;span class="inner2Block" style="float: left;text-decoration: underline"&gt; +data.bodyField1+ &lt;/span&gt;
+                        &lt;p&gt;&#xA0;  &lt;/p&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;填报日期&lt;/span&gt;
+                        &lt;span class="inner2Block block-underLine-size" style="float: left;"&gt;&lt;/span&gt;
+                        &lt;p&gt;&#xA0; &lt;/p&gt;
+                        &lt;p  class="inner2Block block2Center block-whole-size" style=" margin-top:30px;"&gt;单位印章：&lt;/p&gt;
+                        &lt;br&gt;&lt;p style="margin-top:140px "&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;
+                        &lt;/div&gt;&lt;/body&gt;
+                        &lt;/html&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;p align="center"&gt;&lt;strong&gt;说&lt;/strong&gt;&lt;strong&gt;    &lt;/strong&gt;&lt;strong&gt;明&lt;/strong&gt;&lt;strong&gt; &lt;/strong&gt;&lt;/p&gt;
+                        &lt;ol&gt;  &lt;ol&gt;   &lt;ol&gt;
+                        &lt;li&gt;适用范围: 适用于XX市行政区域内的物业管理区域备案； &lt;/li&gt;
+                        &lt;li&gt;本表由申报备案的单位如实填写，申报单位对填写的内容的真实性负责。 &lt;/li&gt;
+                        &lt;li&gt;物业服务企业需保证企业信用系统上填报的数据与纸张报送的资料相一致； &lt;/li&gt;
+                        &lt;li&gt;一个物业管理区域填写一份申请表，n个区域填写n份； &lt;/li&gt;
+                        &lt;li&gt;本表用蓝色或黑色墨水填写，字迹端正，清楚；也可打印； &lt;/li&gt;
+                        &lt;li&gt;企业填写时，如表格内不够填写，可另加附页，也可适当调整表格大小； &lt;/li&gt;
+                        &lt;li&gt;本表统一以A4纸打印。 &lt;/li&gt;
+                        &lt;/ol&gt;
+                        &lt;/ol&gt;  &lt;/ol&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="申请报告">
+                <item key="XX版本" >
+                    <item name="name1" >
+                        &lt;html&gt; &lt;style&gt;
+                        body li{margin:10px;}
+                        body{line-height: 2;  }
+                        .recordReport_div1{ border:1px solid black ;}
+                        .recordReport_div2{ margin-top: 50px; padding: 8px 8px 120px 8px}
+                        .recordReport_ol{ margin-top: 30px; }
+                        &lt;/style&gt;
+
+                        &lt;div class="recordReport_div1"&gt;
+                        &lt;h2 style="text-align: center "&gt;分割物业管理区域备案申请报告 &lt;/h2&gt;
+                        &lt;div class="recordReport_div2"&gt;
+                        &lt;p&gt;&lt;u&gt;+data.approveDepartment+&lt;/u&gt;:
+                        &lt;br /&gt;
+                        &#xA0;&#xA0;&#xA0;&#xA0;按照《XX市物业管理暂行办法》第十一条，十五条等规定，已备案且已实施物业管理的&lt;u&gt; +data.originalName+ &lt;/u&gt;
+                        需要分割为&lt;u&gt; +data.list-length+ &lt;/u&gt;个物业管理区域，分别为
+                    </item>
+                    <item name="name2" cycle="true" footIndex="1" cycleData="data.list" sepStart="、" sepEnd="。">
+                        &lt;span style='text-decoration: underline'&gt;+data.eaProject.eaAreaName+&lt;/span &gt;
+                    </item>
+                    <item name="name3">
+                        现已对原物业管理区域的&lt;u&gt;+data.shareStuff+&lt;/u&gt;
+                        等共用部分和共用设施设备的使用、维护等形成分割方案，
+                        且分割方案经拟分割的各物业管理区域内专有部分占建筑总面积过半数的业主且占总人数过半数的业主同意，
+                        其表决结果已在&lt;u&gt;+data.publicityLocation+&lt;/u&gt;的显著位置公示30日以上。现提交以下材料向贵局申请
+                        办理&lt;span style='text-decoration: underline'&gt;+data.originalName+&lt;/span&gt;分割备案： &lt;/p&gt;
+                        &lt;ol  class="recordReport_ol"&gt;
+                        &lt;li&gt;物业管理区域备案申报表&lt;/li&gt;
+                        &lt;li&gt;分割后各物业管理区域四至范围说明及附图&lt;/li&gt;
+                        &lt;li&gt;分割方案 &lt;/li&gt;
+                        &lt;li&gt;已分割各物业管理区域内专有部分占建筑物总面积过半数的业主且占总人数过半的业主同意分割方案的证明材料 &lt;/li&gt;
+                        &lt;/ol&gt;
+                        &lt;p&gt; &#xA0; &#xA0;&#xA0;  &#xA0;&#xA0;专此报告&lt;/p&gt;
+                        &lt;p style='text-align:right;margin-top:50px'&gt;&#xA0; &#xA0;  &#xA0;&#xA0; 年 &#xA0;&#xA0;   &#xA0; &#xA0; 月   &#xA0; &#xA0; &#xA0;  日 &#xA0; &#xA0; &lt;/p&gt;
+                        &lt;p  style='text-align:right;'&gt;单位印章&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;/div&gt;&lt;/html&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="基本情况表">
+                <item key="XX版本">
+                    <item name="name1" cycle="true" footIndex="0" isAlonePage="true" cycleData="data.list">
+                        &lt;table border="1" cellspacing="0" cellpadding="0"  style="text-align: center;padding:5px;height:95%"&gt;
+                        &lt;tr&gt; &lt;td  colspan="6" style="text-align:center;padding:5px" &gt;&lt;Strong&gt;分割的第
+                        +data.index+个物业管理区域基本情况 &lt;/Strong&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;原物业区名称 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.originalName+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;项目名称（标准地名） &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  width="190"&gt;&lt;p&gt;+data.eaProject.eaAreaName+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;物业类型 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  width="190" colspan="2" &gt;&lt;p&gt;+data.eaProject.eaAreaType-EnumEaAreaType+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;详细地址 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.eaProject.eaAreaAddress+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr &gt;  &lt;td  rowspan="2" &gt;&lt;p&gt;四至范围 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" style="text-align: left;padding-left:5px" &gt;&lt;p&gt;东：+data.eaProject.fourToEast+ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" style="text-align: left;padding-left:5px" &gt;&lt;p&gt;南：+data.eaProject.fourToSouth+ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="2" style="text-align: left;padding-left:5px" &gt;&lt;p&gt;西：+data.eaProject.fourToWest+ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" style="text-align: left;padding-left:5px" &gt;&lt;p&gt;北：+data.eaProject.fourToNorth+ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;项目建设单位名称 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.buildUnit.OrgName+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;项目总期数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.projectTotalPeriods+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;项目已开发期数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.projectPeriod+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;物业服务企业名称 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.realtyMgeCom.OrgName+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;法定代表人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.realtyMgeCom.LegalRep+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;联系电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.realtyMgeCom.LegalRepTel+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;资质等级 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.realtyMgeCom.LicenseLevel-EnumEQulifyLevel+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;资质证号 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.realtyMgeCom.LicenseNo+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;办公地点 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.realtyMgeCom.Address+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;办公电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.realtyMgeCom.OfficePhone+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;项目联系人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.realtyMgeCom.ContactPerson+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;联系电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.realtyMgeCom.ContactTel+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;项目占地面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.eaProject.projectArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;房屋建筑用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.buildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;绿化用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.eaProject.greenArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;市政公建配套用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.municipalBuildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;其他用地 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.eaProject.OthersArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;物业总建筑面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.eaProject.realtyBuildTotalArea+㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;物业服务用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.realtyServiceArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;公建配套设施 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.eaProject.publicFacilityArea+ ㎡ &lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;多层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.multiStoreyArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;高层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.eaProject.highStoreArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;独立式别墅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.singleVillaArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;办公楼，写字楼 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.eaProject.officeArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;商业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.commerceArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;工业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.eaProject.industArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;停车场&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.eaProject.parkingArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;其他建筑 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.eaProject.othersBuildArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;总套数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;+data.eaProject.totalHouseNum+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;&lt;/table&gt;
+                        &lt;p&gt;注：本业由申请人填写，字迹工整，如实填写，不得涂改。 &lt;/p &gt;
+                    </item>
+                </item>
+            </item>
+            <item key="备案要件">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;div&gt;&lt;table height="90%" width="100%" border="1" cellspacing="0" cellpadding="5"&gt; &lt;tr align="center"&gt;
+                        &lt;td colspan="2"&gt;&lt;strong&gt;审批文件列表情况&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td width="42%"&gt;物业管理区域备案申报表&lt;/td&gt; &lt;td width="58%"&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;建设单位营业执照正、副本&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;《建设用地规划许可证》及附图&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;建设项目修建性详细规划或者建设工程设计方案总平图&lt;/td&gt; &lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;物业管理区域内配置的物业管理用房预测绘或者实测绘报告&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td&gt;地名批复文件&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td colspan="2" align="center"&gt;&lt;strong&gt;备案意见&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td height="40%"&gt;备案实施机关意见&lt;/td&gt;&lt;td align="bottom"&gt;&lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p style="text-align:center"&gt;  签字 ：&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0; &#xA0;&#xA0; &#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; 日 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;&lt;tr&gt;&lt;td&gt;物业管理区域备案回执&lt;/td&gt;&lt;td align="center"&gt;
+                        &lt;p&gt;______物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;
+                        &lt;p&gt; 备案时间 ：  &#xA0; &#xA0;  &#xA0;&#xA0; 年 &#xA0;&#xA0;   &#xA0; &#xA0; 月   &#xA0; &#xA0; &#xA0;  日&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;/table&gt;&lt;div&gt; &lt;ol&gt; &lt;span&gt;备注：&lt;/span&gt;&lt;li&gt;本页由备案登记机关填写，字迹工整，如实填写，不得涂改;&lt;/li&gt;
+                        &lt;li&gt;审批文件列表情况的下划线处填写“是”或者“不”。&lt;/li&gt; &lt;/ol&gt;&lt;/div&gt;&lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item  key="备案回执">
+            <item key="XX版本">
+                <item name="1">
+                    &lt;table width="100%" height="763" border="1" cellpadding="0" cellspacing="0"&gt;
+                    &lt;tr&gt;
+                    &lt;td width="100%" valign="top"&gt;&lt;p align="right"&gt;&lt;/p&gt;
+                    &lt;p align="right"&gt;&lt;u&gt;             &lt;/u&gt;物区备[              ] 第+data.docCode+号 &lt;/p&gt;
+
+                    &lt;h2 align="center"&gt;&lt;strong&gt;物业务管理区域备案回执&lt;/strong&gt;&lt;strong&gt;  &lt;/strong&gt;&lt;/h2&gt;
+                    &lt;span&gt;&lt;u&gt;+data.docBodyJSON.applyOrgName+&lt;/u&gt;：&lt;/span&gt; &lt;br /&gt;
+                    &lt;p&gt;
+                          你司申请坐落于&lt;u&gt; +data.eaProject.eaAreaAddress+ &lt;/u&gt;的&lt;u&gt; +data.eaProject.eaAreaName+ &lt;/u&gt;的物业管理区域备案材料收悉。备案主要内容如下： &lt;/p&gt;
+                    &lt;ol&gt;
+                    &lt;li&gt;物业类型：&lt;u&gt;+data.eaProject.eaAreaType-EnumEaAreaType+&lt;/u&gt;； &lt;/li&gt;
+                    &lt;li style="margin:10px 0"&gt;物业总建筑物面积：&lt;u&gt; +data.eaProject.realtyBuildTotalArea+   &lt;/u&gt;㎡； &lt;/li&gt;
+                    &lt;li&gt;物业四至范围： &lt;/li&gt;
+                    &lt;/ol&gt;
+                    &lt;p&gt;      东：&lt;u&gt;+data.eaProject.fourToEast+ &lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      西：&lt;u&gt;+data.eaProject.fourToWest+&lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      南：&lt;u&gt;+data.eaProject.fourToSouth+ &lt;/u&gt;&lt;/p&gt;&lt;br /&gt;
+                    &lt;p&gt;      北：&lt;u&gt;+data.eaProject.fourToNorth+ &lt;/u&gt;&lt;/p&gt;
+                    &lt;br&gt;&lt;br /&gt;
+                    &lt;p align="right"&gt;年      月     日 &lt;br /&gt;&lt;br /&gt;
+                    （备案机关印章） &lt;/p&gt;
+                    &lt;br&gt;&lt;br /&gt;
+                    &lt;p&gt;签收人签章：&lt;u&gt;          &lt;/u&gt;时间：&lt;u&gt;             &lt;/u&gt;年&lt;u&gt;         &lt;/u&gt;月&lt;u&gt;        &lt;/u&gt;日 （此两项为打印后签收人手写签名） &lt;/p&gt;
+                    &lt;br&gt;
+                    &lt;p&gt;备注：1. 一式两份，申请单位与备案机关各留存一份； &lt;br /&gt;
+                    2． 物业类型分为：多层住宅，高层住宅，别墅，办公楼，工业厂房及其他物业。混合型共五中。 &lt;/p&gt;
+                    &lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;/table&gt;
+                </item>
+            </item>
+        </item>
+    </item>
+
+        <item key="审批文件列表">
+            <item key="XX版本">
+                <item name="name1">前期物业服务合同备案申报表</item>
+                <item name="name2">物业服务企业资质证书正、副本</item>
+                <item name="name3">物业服务合同</item>
+            </item>
+        </item>
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">申报表</item>
+                <item name="name3" pageNum="1" copies="1" jsonRoot="false">申请报告</item>
+                <item name="name4" pageNum="1" copies="1" jsonRoot="false">基本情况表</item>
+                <item name="name5" pageNum="1" copies="1" jsonRoot="false">备案要件</item>
+            </item>
+
+        </item>
+        <item key="备案申报表">
+            <item key="申报表">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt;
+                        &lt;style id='style-recordBuild'&gt;
+                        .text-center{text-align: center; }
+                        .header-text-font{font-size: 40px;line-height: 2.2;}
+                        .record-apply { text-align: center; }
+                        .inner2Block{ display: block;}
+                        .block2Center { margin: 0 auto; }
+                        .block-head-size{ width: 80px; height: 20px;}
+                        .block-whole-size{width: 200px;height: 20px; }
+                        .block-underLine-size{ width: 120px;height: 20px;border-bottom: 1px solid black;}
+                        &lt;/style&gt;
+                        &lt;body&gt;&lt;div class='text-center'&gt;
+                        &lt;h1 style=margin-top: 100px&gt;XX市+data.cantonCode+物业服务合同备案 &lt;/h1&gt;
+                        &lt;p&gt;&lt;/p&gt;
+                        &lt;h1 class="record-apply header-text-font" style="margin-top:80px;"&gt;申&lt;br&gt;报&lt;br&gt;表&lt;/h1&gt; &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;申请单位&lt;/span&gt;
+                        &lt;span class="inner2Block" style="float: left;text-decoration: underline"&gt; +data.bodyField1+ &lt;/span&gt;
+                        &lt;p&gt;&#xA0;  &lt;/p&gt;
+                        &lt;span class="block-head-size" style="float: left;margin-left:36%"&gt;填报日期&lt;/span&gt;
+                        &lt;span class="inner2Block block-underLine-size" style="float: left;"&gt;&lt;/span&gt;
+                        &lt;p&gt;&#xA0; &lt;/p&gt;
+                        &lt;p  class="inner2Block block2Center block-whole-size" style=" margin-top:30px;"&gt;单位印章：&lt;/p&gt;
+                        &lt;br&gt;&lt;p style="margin-top:140px "&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;
+                        &lt;/div&gt;&lt;/body&gt;
+                        &lt;/html&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;p align="center"&gt;&lt;strong&gt;说&lt;/strong&gt;&lt;strong&gt;    &lt;/strong&gt;&lt;strong&gt;明&lt;/strong&gt;&lt;strong&gt; &lt;/strong&gt;&lt;/p&gt;
+                        &lt;ol&gt;  &lt;ol&gt;   &lt;ol&gt;
+                        &lt;li&gt;适用范围: 适用于XX市行政区域内的物业管理区域备案； &lt;/li&gt;
+                        &lt;li&gt;本表由申报备案的单位如实填写，申报单位对填写的内容的真实性负责。 &lt;/li&gt;
+                        &lt;li&gt;物业服务企业需保证企业信用系统上填报的数据与纸张报送的资料相一致； &lt;/li&gt;
+                        &lt;li&gt;一个物业管理区域填写一份申请表，n个区域填写n份； &lt;/li&gt;
+                        &lt;li&gt;本表用蓝色或黑色墨水填写，字迹端正，清楚；也可打印； &lt;/li&gt;
+                        &lt;li&gt;企业填写时，如表格内不够填写，可另加附页，也可适当调整表格大小； &lt;/li&gt;
+                        &lt;li&gt;本表统一以A4纸打印。 &lt;/li&gt;
+                        &lt;/ol&gt;
+                        &lt;/ol&gt;  &lt;/ol&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="申请报告">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;html&gt; &lt;style&gt;
+                        body li{margin:10px;}
+                        body{line-height: 2;  }
+                        .recordReport_div1{ border:1px solid black ;}
+                        .recordReport_div2{ margin-top: 50px; padding: 8px 8px 120px 8px}
+                        .recordReport_ol{ margin-top: 30px; }
+                        &lt;/style&gt;
+
+                        &lt;div class="recordReport_div1"&gt;
+                        &lt;h1 align="center"&gt;物业服务合同备案申请报告 &lt;/h1&gt;
+                        &lt;div class="recordReport_div2"&gt; &lt;p&gt; &lt;u&gt;+data.docBodyJSON.approveDepartment+ &lt;/u&gt;:
+                        &lt;br /&gt;&#xA0;&#xA0;&#xA0;&#xA0; 按照《XX市物业管理暂行办法》第七十三条等规定，
+                        &lt;u&gt; '+data.docBodyJSON.hireUnitName+' &lt;/u&gt;选聘了我司作为&lt;u&gt; '+data.docBodyJSON.eaProject.eaAreaName+' &lt;/u&gt;的物业管理单位，
+                        并与我司签订了&lt;u&gt; '+data.docBodyJSON.eaProject.eaAreaName+' &lt;/u&gt;的物业服务合同。现提交以下材料向贵局申请办理物业服务合同备案： &lt;/p&gt;
+                        &lt;ol class="recordReport_ol"&gt; &lt;li&gt;前期物业服务合同备案申报表&lt;/li&gt;
+                        &lt;li&gt;物业服务企业资质证书正，副本&lt;/li&gt;
+                        &lt;li&gt;物业服务合同 &lt;/ol&gt; &lt;p&gt;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;专此报告。 &lt;/p&gt;
+                        &lt;p align="right"&gt; &#xA0;&#xA0;  年  &#xA0;&#xA0;&#xA0;&#xA0;   月 &#xA0;&#xA0;&#xA0;&#xA0;   日 &lt;br/&gt; （单位印章） &lt;/p&gt;
+                        &lt;/div&gt;&lt;/div&gt;&lt;/html&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="基本情况表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;table width="100%" height="95%" border="1" cellspacing="0" cellpadding="0"  style="text-align: center;padding:5px;"&gt;
+                        &lt;tr&gt; &lt;td  colspan="10" &gt;&lt;p align="center"&gt;&lt;strong&gt;物业服务合同基本情况&lt;/strong&gt;&lt;strong&gt; &lt;/strong&gt;&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  rowspan="3" width="25" &gt;选聘单位 &lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;企业名称 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td   colspan="8" &gt;&lt;p&gt;+data.docBodyJSON.hireUnitName+（盖章） &lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td &gt;&lt;p&gt;办公地点 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td   colspan="2" width="240"&gt;&lt;p&gt;+data.docBodyJSON.hireUnitAddress+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td   colspan="5" width="190"&gt;&lt;p&gt;办公电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  width="190"&gt;&lt;p&gt;+data.docBodyJSON.hireUnitPhone+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  &gt;&lt;p&gt;联系人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.contactPerson+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;联系电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.contactTel+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  rowspan="5"  width="25" &gt;物业服务企业&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;企业名称 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="8" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.OrgName+（盖章） &lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;法定代表人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.LegalRep+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;联系电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.LegalRepTel+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;资质等级 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.LicenseLevel+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;资质证号 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.LicenseNo+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;办公地点 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.Address+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;办公电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.OfficePhone+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  &gt;&lt;p&gt;联系人 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.ContactPerson+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &lt;p&gt;联系电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.realtyMgeCom.ContactTel+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  colspan="2" &gt;&lt;p&gt;委托期限 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="8" &gt;&lt;p&gt;   +data.docBodyJSON.hireTimeLimitStart-date+
+                        起    至 &#xA0;  +data.docBodyJSON.hireTimeLimitEnd-date+ &lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="10" &gt;&lt;p align="center"&gt;&lt;strong&gt;物业服务项目基本情况&lt;/strong&gt;&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td   colspan="3" &gt;&lt;p&gt;项目名称（标准地名） &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3"  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaName+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;项目类型 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaType-EnumEaAreaType+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  colspan="3" &gt;&lt;p&gt;服务项目经理 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyManage+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;联系电话 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="3" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyManageCall+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="3" &gt;&lt;p&gt;详细地址 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="7" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.eaAreaAddress+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="3" rowspan="2" &gt;&lt;p&gt;四至范围 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;东： +data.docBodyJSON.eaProject.fourToEast+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;南： +data.docBodyJSON.eaProject.fourToSouth+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="2" &gt;&lt;p&gt;西： +data.docBodyJSON.eaProject.fourToWest+&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="5" &gt;&lt;p&gt;北： +data.docBodyJSON.eaProject.fourToNorth+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="3" &gt;&lt;p&gt;项目占地面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="7" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.projectArea+ ㎡&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  colspan="3" &gt;&lt;p&gt;物业总建筑面积 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="7" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyBuildTotalArea+ ㎡&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;   &lt;td  colspan="3" &gt;&lt;p&gt;公建配套设施 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.publicFacilityArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;物业服务用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.realtyServiceArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="3" &gt;&lt;p&gt;多层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.multiStoreyArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;高层住宅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.highStoreArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="3" &gt;&lt;p&gt;独立式别墅 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.singleVillaArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;办公楼，写字楼 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.officeArea+ ㎡ &lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt;  &lt;td  colspan="3" &gt;&lt;p&gt;商业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.commerceArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;工业用房 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.industArea+ ㎡ &lt;/p&gt;&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  colspan="3" &gt;&lt;p&gt;停车场 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.parkingArea+ ㎡ &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;其他建筑 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.othersBuildArea+ ㎡ &lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  colspan="3" &gt;&lt;p&gt;总套数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  &gt;&lt;p&gt;+data.docBodyJSON.eaProject.totalHouseNum+ 套&lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="4" &gt;&lt;p&gt;已入住户数 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="2" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.houseHasIn+&lt;/p&gt;&lt;/td&gt;  &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td  colspan="3" &gt;&lt;p&gt;物业管理服务收费标准（元/月.平方米） &lt;/p&gt;&lt;/td&gt;
+                        &lt;td  colspan="7" &gt;&lt;p&gt;+data.docBodyJSON.eaProject.servicePrice+&lt;/p&gt;&lt;/td&gt; &lt;/tr&gt; &lt;/table&gt;
+                        &lt;p&gt;注：本业由申请人填写，自己工整，如实填写，不得涂改。 &lt;/p&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="备案要件">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;div&gt;&lt;table width="100%" height="90%" border="1" cellspacing="0" cellpadding="5"&gt; &lt;tr align="center"&gt;
+                        &lt;td colspan="2"&gt;&lt;strong&gt;备案要件情况&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td width="42%"&gt;物业服务合同备案申报表&lt;/td&gt; &lt;td width="58%"&gt;___符合法定形式&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;物业服务企业资质证书正、副本&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt; &lt;td&gt;物业服务合同&lt;/td&gt;&lt;td&gt;___符合法定形式&lt;/td&gt; &lt;/tr&gt;
+                        &lt;tr&gt;&lt;td colspan="2" align="center"&gt;&lt;strong&gt;备案意见&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt; &lt;td height="40%"&gt;备案实施机关意见&lt;/td&gt;&lt;td align="bottom"&gt;&lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt; &lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;p style="text-align:center"&gt;  签字 ：&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0; &#xA0;&#xA0; &#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;&#xA0; 日 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;&lt;tr&gt;&lt;td&gt;物业服务合同备案回执&lt;/td&gt;&lt;td align="center"&gt;
+                        &lt;p&gt;______物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;
+                        &lt;p&gt; 备案时间 ：  &#xA0; &#xA0;  &#xA0;&#xA0; 年 &#xA0;&#xA0;   &#xA0; &#xA0; 月   &#xA0; &#xA0; &#xA0;  日&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
+                        &lt;/table&gt;&lt;div&gt; &lt;ol&gt; &lt;span&gt;备注：&lt;/span&gt;&lt;li&gt;本页由备案登记机关填写，字迹工整，如实填写，不得涂改;&lt;/li&gt;
+                        &lt;li&gt;备案要件情况的下划线处填写“是”或者“不”。&lt;/li&gt; &lt;/ol&gt;&lt;/div&gt;&lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item  key="备案回执">
+            <item key="XX版本" jsonRoot="false">
+                <item name="1">
+                    &lt;table width="100%" height="95%" border="1" cellpadding="0" cellspacing="0"&gt;
+                    &lt;tr&gt;
+                    &lt;td valign="top"&gt;&lt;p align="right"&gt;&lt;/p&gt;
+                    &lt;p align="right"&gt;&lt;u&gt;       &lt;/u&gt;物区备[          ] 第+data.docCode+号 &lt;/p&gt;
+
+                    &lt;h2 align="center"&gt;&lt;strong&gt;物业服务合同备案回执&lt;/strong&gt;&lt;strong&gt;         &lt;/strong&gt;&lt;/h2&gt;
+                    &lt;span&gt;&lt;u&gt;+data.docBodyJSON.realtyMgeCom.OrgName+&lt;/u&gt;：&lt;/span&gt; &lt;br /&gt;
+                    &lt;p&gt;      你司提交物业服务合同备案材料收悉。备案主要内容如下： &lt;/p&gt;
+                    &lt;ol&gt;
+                    &lt;li&gt;资质等级：&lt;u&gt;+data.docBodyJSON.realtyMgeCom.LicenseLevel-EnumEQulifyLevel+&lt;/u&gt;&lt;/li&gt;
+                    &lt;li style="margin:2px 0;"&gt;选聘单位名称：&lt;u&gt; +data.docBodyJSON.hireUnitName+&lt;/u&gt;&lt;/li&gt;
+                    &lt;li&gt;物业项目名称：&lt;u&gt;+data.docBodyJSON.eaProject.eaAreaName+ &lt;/u&gt;&lt;/li&gt;
+                    &lt;li style="margin:2px 0;"&gt;物业项目类型：&lt;u&gt;+data.docBodyJSON.eaProject.eaAreaType-EnumEaAreaType+&lt;/u&gt;&lt;/li&gt;
+                    &lt;li&gt;物业总建筑面积：&lt;u&gt; +data.docBodyJSON.eaProject.realtyBuildTotalArea+&lt;/u&gt;&lt;/li&gt;
+                    &lt;li style="margin:2px 0;"&gt;合同期限：&lt;u&gt;+data.docBodyJSON.hireTimeLimitStart+至
+                    +data.docBodyJSON.hireTimeLimitEnd+&lt;/u&gt;&lt;/li&gt;
+                    &lt;/ol&gt;
+                    &lt;p&gt;&#xA0;&lt;/p&gt;  &lt;p&gt;&#xA0;&lt;/p&gt;
+                    &lt;p&gt;&#xA0;&lt;/p&gt;
+                    &lt;p align="right"&gt;    年            月        日 &lt;/p&gt;
+                    &lt;p align="right"&gt;（备案机关印章） &lt;/p&gt;
+                    &lt;p&gt;&lt;u&gt;&lt;/u&gt;&lt;/p&gt;
+                    &lt;p&gt;&#xA0;&lt;/p&gt;
+                    &lt;p&gt;&#xA0;&lt;/p&gt;  &lt;p&gt;&#xA0;&lt;/p&gt;
+                    &lt;p&gt;&#xA0;&lt;/p&gt;
+                    &lt;p&gt;签收人签章：&lt;u&gt;            &lt;/u&gt;时间：&lt;u&gt;           &lt;/u&gt;年&lt;u&gt;          &lt;/u&gt;月&lt;u&gt;         &lt;/u&gt;日 （此两项为打印后签收人手写签名）      &lt;/p&gt;
+                    &lt;p&gt;备注：1. 一式两份，申请单位与备案机关各留存一份； &lt;br /&gt;
+                    &lt;/p&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;/table&gt;
+                </item>
+            </item>
+        </item>
+    </item>
+    <item   key="8" disc="物业承接查验备案"> 
+    <item key="9" disc="业主委员会备案"> 
+        <item key="审批文件列表">
+            <item key="XX版本">
+                <item name="name1">业主委员会备案申报表</item>
+                <item name="name2">业主委员会备案基本情况表</item>
+                <item name="name3">管理规约</item>
+                <item name="name4">业主大会议事规则</item>
+                <item name="name5">业主大会的会议记录和会议决定</item>
+            </item>
+            <item key="XX版本">
+                <item name="name1">业主委员会备案申报表</item>
+                <item name="name2">业主委员会备案基本情况表</item>
+            </item>
+        </item>
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">申报表</item>
+                <item name="name3" pageNum="1" copies="1" jsonRoot="false">申请报告</item>
+                <item name="name4" pageNum="1" copies="1" jsonRoot="false">基本情况表</item>
+                <item name="name5" pageNum="1" copies="1" jsonRoot="false">备案要件</item>
+            </item>
+            <item key="XX版本">
+                <item name="name1">备案信息表</item>
+                <item name="name2">成员信息表</item>
+            </item>
+        </item>
+        <item key="备案申报表">
+            <item key="申报表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                        &lt;div style="text-align:right;"&gt;&lt;p style="line-height:4; margin-right:30px;"&gt;______物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;&lt;h2 style="line-height:5"&gt;XX市+data.cantonCode+ 业主委员会备案&lt;/h2&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin: 30px 0;"&gt;&lt;h1 style="line-height:3"&gt;申&lt;br /&gt;报&lt;br /&gt;表&lt;/h1&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin-top: 100px;"&gt;
+                        &lt;p&gt;申 报 单 位&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;+data.bodyField0+ &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;
+                        &lt;p&gt;填 报 日 期&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;+data.createTime-date+ &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;&lt;p&gt;（有合法业主委员会印章的加盖）&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;margin-top: 80px;"&gt;&lt;p&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;div style="height:842px; line-height: 1.5"&gt;
+                        &lt;div style="text-align:center; line-height: 4;"&gt;&lt;h2&gt;说&#xA0;&#xA0;明&lt;/h2&gt;&lt;/div&gt;
+                        &lt;blockquote&gt;
+                        &lt;p style="margin-top: 40px;"&gt;一、适用范围：适用于XX市行政区域内业主委员会选举产生后的备案；&lt;/p&gt;
+                        &lt;p&gt;二、本表由申报备案的业主委员会如实填写，申报人对填写内容的真实性负责；&lt;/p&gt;
+                        &lt;p&gt;三、本表用蓝色或黑色墨水笔填写，字迹要端正、清楚；也可打印；&lt;/p&gt;
+                        &lt;p&gt;四、填写时，如表格内不够填写，可另加附页，也可适当调整表格大小；&lt;/p&gt;
+                        &lt;p&gt;五、“______物业备[&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号”空白处由备案机关填写；&lt;/p&gt;
+                        &lt;p&gt;六、本表统一以 A4 只打印。&lt;/p&gt;
+                        &lt;/blockquote&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="申请报告">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height:842px"&gt;
+                        &lt;div style="border:1px solid #000; height: 92%; padding:10px;"&gt;
+                        &lt;div style="text-align:center; line-height: 4;"&gt;&lt;h2&gt;业主委员会备申请报告&lt;/h2&gt;&lt;/div&gt;
+                        &lt;p style="line-height:2;"&gt;+data.docBodyJSON.approveDepartment+街道办事处（镇人民政府）：&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em;"&gt; +data.docBodyJSON.ownerMeeting.oMeetingTime-date+ ，&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;
+                        +data.docBodyJSON.ownerMeeting.oMeetingOrgName+ &#xA0;&#xA0;&lt;/span&gt;
+                        在&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0; +data.bodyField1+ &#xA0;&#xA0;&lt;/span&gt;小区召开业主大会会议，会议
+                        &lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;表决通过了《业主大会议事规则》和《管理规约》（仅换届选举业委会委员的可不写）、&#xA0;&#xA0;&lt;/span&gt;选举产生了
+                        &lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0; +data.docBodyJSON.ownerTeamMemberList-length+ &#xA0;&#xA0;&lt;/span&gt;名业主委员会委员（详情见《业主委员会备案基本情况表》），
+                        现向贵单位提交以下材料申请办理业委会备案：&lt;/p&gt;
+                        &lt;p style="line-height:1.5; text-indent:2em"&gt;1.管理规约、业主大会议事规则；&lt;/p&gt;
+                        &lt;p style="line-height:1.5; text-indent:2em"&gt;2.业主大会的会议记录和会议决定；&lt;/p&gt;
+                        &lt;p style="line-height:1.5; text-indent:2em"&gt;3.《业主委员会备案基本情况表》等资料。&lt;/p&gt;
+                        &lt;p style="line-height:1.5; text-indent:2em"&gt;专此报告。&lt;/p&gt;
+                        &lt;div style="text-align:right;margin-top:80px;"&gt;&lt;p style="line-height:2; margin-right:30px;"&gt;年&#xA0;&#xA0;&#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;日&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:right;"&gt;&lt;p style="line-height:2; margin-right:30px;"&gt;（有合法业主委员会印章的加盖）&lt;/p&gt;&lt;/div&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;业主委员会委员签名：&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div style="line-height: 1.5"&gt;&lt;p&gt;备注：请业主委员会委员（过半数委员）在申请报告“签名”处签名或者加盖合法的业主委员会印章。&lt;/p&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="基本情况表">
+                <item key="XX版本">
+                    <item name="name1" disc="封面" onePage="1">
+                        &lt;div style="height:842px; line-height: 1.5"&gt;
+                        &lt;div style="text-align:center; line-height: 5;"&gt;&lt;h2&gt;XX市+data.cantonCode+业主委员会备案&lt;/h2&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin: 30px 0"&gt;&lt;h1 style="line-height:2"&gt;基&lt;br /&gt;本&lt;br /&gt;情&lt;br /&gt;况&lt;br /&gt;表&lt;/h1&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin-top: 100px"&gt;
+                        &lt;p&gt;申 报 单 位&lt;span style="text-decoration:underline;"&gt;&#xA0;&#xA0; +data.bodyField0+&#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;
+                        &lt;p&gt;填 报 日 期&lt;span style="text-decoration:underline;"&gt;&#xA0;&#xA0; +data.createTime-date+ &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin-top:80px"&gt;&lt;p&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                    <item name="name2" onePage="2">
+                        &lt;div style="height:842px"&gt;
+                        &lt;table border="1" height="90%" cellspacing="0" cellpadding="8"&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="4" align="center"&gt;&lt;strong&gt;物业管理区域基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%"&gt;项目名称（标准地名）&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.bodyField1+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;坐落地点&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.docBodyJSON.eaArea.eaAreaAddress+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;物业所在地街道办事处（镇人民政府）名称&lt;/td&gt;
+                        &lt;td width="25%"&gt;&#xA0;&lt;/td&gt;
+                        &lt;td width="25%"&gt;联系电话&lt;/td&gt;
+                        &lt;td width="25%"&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;物业所在地居委会名称&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;td&gt;联系电话&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;建设单位名称&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;td&gt;联系电话&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;物业服务企业名称&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;td&gt;联系电话&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;总建筑面积&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;td&gt;总套数&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;业主总人数&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;td&gt;已入住户数&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="4" align="center"&gt;&lt;strong&gt;业主大会表决《管理规约》、《议事规则》基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;业主大会召开时间&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.docBodyJSON.ownerMeeting.oMeetingTime-date+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;业主大会召开地点&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.docBodyJSON.ownerMeeting.oMeetingAddr+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;召开业主大会机构名称&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.docBodyJSON.ownerMeeting.oMeetingOrgName+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;具有业主大会投票权的业主总人数&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.voteTotalNum+  人&lt;/td&gt;
+                        &lt;td&gt;具有业主大会投票权的建筑物总面积&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.voteTotalArea+  ㎡&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;同意《管理规约》的业主人数&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeProtocolNum+  人&lt;/td&gt;
+                        &lt;td&gt;同意《管理规约》的业主人数占总人数百分比&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeProtocolNumRatio+  %&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;同意《管理规约》的业主专有部分面积&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeProtocolArea+  ㎡&lt;/td&gt;
+                        &lt;td&gt;同意《管理规约》的业主专有部分面积占建筑物总面积百分比&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeProtocolAreaRatio+  %&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;同意《议事规则》的业主人数&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeRuleNum+  人&lt;/td&gt;
+                        &lt;td&gt;同意《议事规则》的业主人数占总总人数百分比&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeRuleNumRatio+  %&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;同意《议事规则》的业主专有部分面积&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeRuleArea+  ㎡&lt;/td&gt;
+                        &lt;td&gt;同意《议事规则》的业主专有部分面积占建筑物总面积百分比&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeRuleAreaRatio+  %&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/table&gt;
+                        &lt;p&gt;备注：业主委员会委员（需过半数委员）在本页空白处签名。&lt;/p&gt;
+                        &lt;/div&gt;
+                    </item>
+
+                    <item name="name3" onePage="3">
+                        &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                        &lt;table border="1" height="90%" cellspacing="0" cellpadding="10"&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="5" align="center"&gt;&lt;strong&gt;业主委员会基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2" width="25%"&gt;业主委员会任期&lt;/td&gt;
+                        &lt;td colspan="3", width="75%"&gt;+data.docBodyJSON.ownerTeam.FoundedTime-date+ 起，至
+                        +data.docBodyJSON.ownerTeam.ExpirationTime-date+ 止&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2" width="25%"&gt;主任姓名&lt;/td&gt;
+                        &lt;td width="25%"&gt;&#xA0;+data.docBodyJSON.ownerTeam.MasterName+ &lt;/td&gt;
+                        &lt;td width="25%"&gt;联系电话&lt;/td&gt;
+                        &lt;td width="25%"&gt;&#xA0;+data.docBodyJSON.ownerTeam.MasterTel+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2"&gt;副主任姓名&lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.docBodyJSON.ownerTeam.DeputyDirectorName+ &lt;/td&gt;
+                        &lt;td&gt;联系电话&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2"&gt;委员人数&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;td&gt;候补委员人数&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="5" align="center"&gt;&lt;strong&gt;选举业主委员会委员表决情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr style="text-align: center"&gt;
+                        &lt;td width="15%"&gt;姓名&lt;/td&gt;
+                        &lt;td colspan="2" width="35%"&gt;同意业主人数占总人数百分比&lt;/td&gt;
+                        &lt;td colspan="2" width="50%"&gt;同意业主专有部分面积占建筑物总面积百分比&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name4" cycle="true" footIndex="3" onePage="3"
+                          cycleData="data.docBodyJSON.ownerTeamMemberList" cycleMatchKey="memberType"  cycleMacthValue="e-1">
+                        &lt;tr&gt;
+                        &lt;td&gt;&#xA0;+data.name+ &lt;/td&gt;
+                        &lt;td colspan="2"&gt;&#xA0;+data.agreeNumRatio+ &#xA0;%&lt;/td&gt;
+                        &lt;td colspan="2"&gt;&#xA0;+data.agreeAreaRatio+ &#xA0;%&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name5" onePage="3" >
+                        &lt;tr&gt;
+                        &lt;td colspan="5" align="center"&gt;&lt;strong&gt;选举业主委员会候补委员表决情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr style="text-align: center;"&gt;
+                        &lt;td&gt;姓名&lt;/td&gt;
+                        &lt;td colspan="2"&gt;同意业主人数占总人数百分比&lt;/td&gt;
+                        &lt;td colspan="2"&gt;同意业主专有部分面积占建筑物总面积百分比&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name6" cycle="true" footIndex="5" onePage="3"
+                          cycleData="data.docBodyJSON.ownerTeamMemberList" cycleMatchKey="memberType"  cycleMacthValue="e-2">
+                        &lt;tr&gt;
+                        &lt;td&gt;&#xA0;+data.name+ &lt;/td&gt;
+                        &lt;td colspan="2"&gt;&#xA0;+data.agreeNumRatio+ &#xA0;%&lt;/td&gt;
+                        &lt;td colspan="2"&gt;&#xA0;+data.agreeAreaRatio+ &#xA0;%&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name7" onePage="3">
+                        &lt;/table&gt;
+                        &lt;p&gt;备注：业主委员会委员（需过半数委员）在本页空白处签名。&lt;/p&gt;
+                        &lt;/div&gt;
+                    </item>
+
+                    <item name="name8" onePage="4">
+                        &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                        &lt;table border="1" height="90%" width="100%" cellspacing="0" cellpadding="5"&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="8" align="center"&gt;&lt;strong&gt;业主委员会委员基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr align="center"&gt;
+                        &lt;td width="14%"&gt;姓名&lt;/td&gt;
+                        &lt;td&gt;性别&lt;/td&gt;
+                        &lt;td&gt;年龄&lt;/td&gt;
+                        &lt;td&gt;政治面貌&lt;/td&gt;
+                        &lt;td&gt;工作单位&lt;/td&gt;
+                        &lt;td&gt;家庭住址&lt;/td&gt;
+                        &lt;td&gt;委员会职务&lt;/td&gt;
+                        &lt;td&gt;联系电话&lt;/td&gt;
+                        &lt;/tr&gt;  </item>
+                    <item name="name9" onePage="4" footIndex="8" cycle="true"
+                          cycleData="data.docBodyJSON.ownerTeamMemberList"   cycleMatchKey="memberType"  cycleMacthValue="e-1">
+                        &lt;tr&gt;
+                        &lt;td&gt;&#xA0;+data.name+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.sex-EnumSex+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.age+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.politicalStatus-EnumPol+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.workUnit+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.address+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.duty-EnumDuty+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.tel+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name10" onePage="4">
+                        &lt;tr&gt;
+                        &lt;td colspan="8" align="center"&gt;&lt;strong&gt;业主委员会候补委员基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td align="center"&gt;姓名&lt;/td&gt;
+                        &lt;td align="center"&gt;性别&lt;/td&gt;
+                        &lt;td align="center"&gt;年龄&lt;/td&gt;
+                        &lt;td align="center"&gt;政治面貌&lt;/td&gt;
+                        &lt;td align="center"&gt;工作单位&lt;/td&gt;
+                        &lt;td colspan="2" align="center"&gt;家庭住址&lt;/td&gt;
+                        &lt;td align="center"&gt;联系电话&lt;/td&gt;
+                        &lt;/tr&gt;</item>
+                    <item name="name11" cycle="true" footIndex="10" onePage="4"
+                          cycleData="data.docBodyJSON.ownerTeamMemberList" cycleMatchKey="memberType"  cycleMacthValue="e-2">
+                        &lt;tr&gt;
+                        &lt;td&gt;&#xA0;+data.name+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.sex-EnumSex+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.age+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.politicalStatus-EnumPol+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.workUnit+ &lt;/td&gt;
+                        &lt;td colspan="2"&gt;&#xA0;+data.address+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.tel+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name12" onePage="4">
+                        &lt;/table&gt;
+                        &lt;div&gt;
+                        &lt;p&gt;备注：1.业主委员会委员（需过半数委员）在本页空白处签名；&lt;/p&gt;
+                        &lt;p&gt;2.上述各页内容由申请人如实填写，字迹工整，不得涂改。&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="备案要件">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height:842px; line-height: 1.5"&gt;
+                        &lt;table height="90%" border="1" cellspacing="0" cellpadding="10"&gt;
+                        &lt;tr align="center"&gt;
+                        &lt;td colspan="2"&gt;&lt;strong&gt;备案要件情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;   &lt;tr&gt;
+                        &lt;td width="30%"&gt;业主委员会备案申报表&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;   &lt;tr&gt;
+                        &lt;td&gt;业主委员会备案基本情况表&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;   &lt;tr&gt;
+                        &lt;td&gt;管理规约&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;    &lt;tr&gt;
+                        &lt;td&gt;业主大会议事规则&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;   &lt;tr&gt;
+                        &lt;td&gt;业主大会的会议记录和会议决定&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;   &lt;tr&gt;
+                        &lt;td colspan="2" align="center"&gt;&lt;strong&gt;备案意见&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;   &lt;tr style="height: 30%"&gt;
+                        &lt;td&gt;备案实施机关意见&lt;/td&gt;
+                        &lt;td align="center" valign="bottom"&gt;签字：&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0;&#xA0;&#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;日&lt;/td&gt;
+                        &lt;/tr&gt;   &lt;tr&gt;
+                        &lt;td&gt;业主委员会备案回执文号及备案时间&lt;/td&gt;
+                        &lt;td align="center" style="line-height: 2;"&gt;
+                        &lt;p&gt;_________物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;
+                        &lt;p&gt;备案时间：&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0;&#xA0;&#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;日&lt;/p&gt;
+                        &lt;/td&gt;   &lt;/tr&gt;  &lt;/table&gt;
+                        &lt;div&gt;  &lt;div&gt; &lt;p style="float: left"&gt;备注：&lt;/p&gt;
+                        &lt;ol style="float:left;"&gt;
+                        &lt;li&gt;本页由备案登记机关填写，字迹工整，如实填写，不得涂改；&lt;/li&gt;
+                        &lt;li&gt;备案要件情况的下划线处填写“是”或者“不”。&lt;/li&gt; &lt;/ol&gt;
+                        &lt;/div&gt;  &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="备案信息表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div&gt;
+                        &lt;table width="100%" height="95%" border="1" cellspacing="0" cellpadding="5"&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%" align="center" valign="middle"&gt;&lt;p&gt;申请类别 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="75%" align="center" valign="middle"&gt;&lt;p&gt;申请成立业主委员会备案流程 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%" align="center" valign="middle"&gt;&lt;p&gt;办理依据 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="75%"&gt;&lt;p&gt;1、《物业管理条例》&lt;br /&gt;2、《业主大会和业主委员会指导规则》 &lt;br /&gt;
+                        3、《广东省物业管理条例》 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%" align="center" valign="middle"&gt;&lt;p&gt;申请材料 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="75%" valign="top"&gt;&lt;p&gt;（1） 备案申请书； &lt;br /&gt;
+                        （2） 街道办事处批复； &lt;br /&gt;
+                        （3） 业主委员会成员基本情况表和房产证（或购房合同）、身份证复印件及承诺书； &lt;br /&gt;
+                        （4） 投票结果统计表（统计表由街道办事处签名盖章确认）； &lt;br /&gt;
+                        （5） 管理规约（修正）、业主大会议事规则（修正）。 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%" align="center" valign="middle"&gt;&lt;p&gt;办理部门 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="75%" align="center" valign="middle"&gt;&lt;p&gt;物管中心 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%" align="center" valign="middle"&gt;&lt;p&gt;办结时限 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="75%" align="center" valign="middle"&gt;&lt;p&gt;5个工作日内（公示日除外） &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%" align="center" valign="middle"&gt;&lt;p&gt;工作流程及责任岗位 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="75%" valign="top"&gt;&lt;p&gt;收件（行政服务中心1天）→初审（物管中心2天）→小区（公示5个工作日）→审批（物管中心负责人1天）→发备案通知书（行政服务中心1天）
+                        &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%" align="center" valign="middle"&gt;&lt;p&gt;备注 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="75%" valign="top"&gt;&lt;p&gt;复印件须提供原件核对，在标注&quot;此复印件与原件相符，所提供资料真实、有效&quot;字样上盖备案单位公章
+                        &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%" align="center" valign="middle"&gt;&lt;p&gt;收费情况 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="75%" align="center" valign="middle"&gt;&lt;p align="center"&gt;无 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/table&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="成员信息表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div&gt;
+                        &lt;div style="text-align:center"&gt;&lt;h2&gt;业主委员会成员基本情况表 &lt;/h2&gt;&lt;/div&gt;
+                        &lt;table border="1" cellspacing="0" cellpadding="5" width="100%" &gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;序号&lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;姓名&lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;房号&lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;职务&lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;联系电话&lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;备注&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="120" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="180" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="183" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="160" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="227" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;td width="154" align="center" valign="middle"&gt;&#xA0; &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/table&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item  key="备案回执">
+            <item key="XX版本">
+                <item name="1">
+                    &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                    &lt;div style="text-align:right;"&gt;&lt;p style="line-height:2; margin-right:30px;"&gt;
+                    ______物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第+data.docCode+号&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:center; line-height: 5"&gt;&lt;h2&gt;业主委员会备案回执&lt;/h2&gt;&lt;/div&gt;
+                    &lt;p&gt;&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0; +data.bodyField0+ &#xA0;&#xA0;&lt;/span&gt;：&lt;/p&gt;
+                    &lt;p style="text-indent:2em;"&gt;你会提交的业主委员会备案材料收悉。备案主要内容如下：&lt;/p&gt;
+                    &lt;ol&gt;
+                    &lt;li&gt;管理规约、业主大会议事规则；&lt;/li&gt;
+                    &lt;li&gt;业主大会的会议记录和会议决定；&lt;/li&gt;
+                    &lt;li&gt;业主委员会委员（候补委员）名单及其基本情况；&lt;/li&gt;
+                    &lt;li&gt;本届业主委员会任期： +data.docBodyJSON.ownerTeam.FoundedTime-date+ 起，
+                    至 +data.docBodyJSON.ownerTeam.ExpirationTime-date+ 止；&lt;/li&gt;
+                    &lt;li&gt;业主委员会委员名单：
+                </item>
+                <item name="name2" cycle="true" footIndex="1">
+                    &lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0; +data.name+ &#xA0;&#xA0;&lt;/span&gt;
+                </item>
+                <item name="name3">
+                    &lt;/ol&gt;
+                    &lt;div style="text-align:right; margin-top: 200px"&gt;&lt;p&gt;
+                    +data.newData-dateNow+&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:right;"&gt;&lt;p&gt;（备案机关印章）&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:center;"&gt;&lt;p&gt;收件人签章：_________ 时间:______年___月___日&lt;/p&gt;&lt;/div&gt;
+                    &lt;blockquote&gt;
+                    &lt;div style="margin-top: 50px"&gt;&lt;p&gt;备注：1.一式叁份，申请单位留存一份，备案机关留存两份；&lt;/p&gt;
+                    &lt;p style="text-indent:2em"&gt;2.担任业主委员会主任或者副主任职务的，在其姓名后标注职务。&lt;/p&gt;
+                    &lt;/blockquote&gt;
+                    &lt;/div&gt;
+                    &lt;/div&gt;
+                </item>
+            </item>
+        </item>
+    </item>
+
+    <item key="10" disc="业主委员会备案事项变更"> 
+        <item key="审批文件列表">
+            <item key="XX版本">
+                <item name="name1">业主委员会备案事项变更申报表</item>
+                <item name="name2">业主委员会备案事项变更基本情况表</item>
+                <item name="name3">业主大会的会议记录和会议决定（召开业主大会的需填写）</item>
+                <item name="name4">《管理规约》（修改了《管理规约》的需填写）</item>
+                <item name="name5">《会议规则》（修改了《会议规则》的需填写）</item>
+            </item>
+        </item>
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">申报表</item>
+                <item name="name3" pageNum="1" copies="1" jsonRoot="false">申请报告</item>
+                <item name="name4" pageNum="1" copies="1" jsonRoot="false">基本情况表封面</item>
+                <item name="name5" pageNum="1" copies="1" jsonRoot="false">修改管理规约、议事规则表决情况</item>
+                <item name="name6" pageNum="1" copies="1" jsonRoot="false">业主委员会信息变更情况表</item>
+                <item name="name7" pageNum="1" copies="1" jsonRoot="false">委员表决情况</item>
+                <item name="name8" pageNum="1" copies="1" jsonRoot="false">委员基本情况</item>
+                <item name="name9" pageNum="1" copies="1" jsonRoot="false">备案要件</item>
+            </item>
+            <item key="XX版本">
+                <item name="name1">备案信息表</item>
+                <item name="name2">成员信息表</item>
+            </item>
+        </item>
+        <item key="备案申报表">
+            <item key="申报表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                        &lt;div style="text-align:right;"&gt;&lt;p style="line-height:4; margin-right:30px;"&gt;______物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;&lt;h2 style="line-height:5"&gt;XX市+data.cantonCode+ 业主委员会备案事项变更&lt;/h2&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin: 30px 0;"&gt;&lt;h1 style="line-height:3"&gt;申&lt;br /&gt;报&lt;br /&gt;表&lt;/h1&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin-top: 100px;"&gt;
+                        &lt;p&gt;申 报 单 位&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;+data.bodyField0+ &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;
+                        &lt;p&gt;填 报 日 期&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;+data.createTime-date+ &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;&lt;p&gt;（有合法业主委员会印章的加盖）&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;margin-top: 80px;"&gt;&lt;p&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;div style="height:842px; line-height: 1.5"&gt;
+                        &lt;div style="text-align:center; line-height: 4;"&gt;&lt;h2&gt;说&#xA0;&#xA0;明&lt;/h2&gt;&lt;/div&gt;
+                        &lt;blockquote&gt;
+                        &lt;p&gt;一、适用范围：适用于XX市行政区域内业主委员会备案的有关事项发生变更；&lt;/p&gt;
+                        &lt;p&gt;二、本表由申报变更的业主委员会如实填写，申报人对填写内容的真实性负责；&lt;/p&gt;
+                        &lt;p&gt;三、请申请人填写发生变更的有关事项，未发生变更的内容无需填写；&lt;/p&gt;
+                        &lt;p&gt;四、本表用蓝色或黑色墨水笔填写，字迹要端正、清楚；也可打印；&lt;/p&gt;
+                        &lt;p&gt;五、填写时，如表格内不够填写，可另加附页，也可适当调整表格大小；&lt;/p&gt;
+                        &lt;p&gt;六、本表统一以 A4 只打印。&lt;/p&gt;
+                        &lt;/blockquote&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="申请报告">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height:842px"&gt;
+                        &lt;div style="border:1px solid #000; height: 92%; padding:10px;"&gt;
+                        &lt;div style="text-align:center; line-height: 4;"&gt;&lt;h2&gt;业主委员会备案事项变更申请报告&lt;/h2&gt;&lt;/div&gt;
+                        &lt;p style="line-height:2;"&gt;__________________街道办事处（镇人民政府）：&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em;"&gt; +data.docBodyJSON.ownerMeeting.oMeetingTime-date+ ，
+                        &lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;+data.docBodyJSON.ownerMeeting.oMeetingOrgName+ &#xA0;&#xA0;&lt;/span&gt;
+                        在&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;+data.bodyField1+ &#xA0;&#xA0;&lt;/span&gt;小区召开业主大会会议，
+                        会议决定业主委员会备案&lt;span style="text-decoration:underline"&gt;（备案回执号）&lt;/span&gt;的&lt;span style="text-decoration:underline"&gt;（事项内容）&lt;/span&gt;进行了变更（详情见业主委员会备案事项变更基本情况），现向贵单位提交以下材料申请办理业委会备案事项变更：&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;1.业主委员会备案事项变更申报表；&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;2.业主委员会备案事项变更基本情况表；&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;3.业主大会的会议记录和会议决定（召开业主大会的需填写）。&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;4.《管理规约》（修改了《管理规约》的需填写）；&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;5.《会议规则》（修改了《会议规则》的需填写）；&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;专此报告。&lt;/p&gt;
+                        &lt;div style="text-align:right;margin-top:80px;"&gt;&lt;p style="line-height:2; margin-right:30px;"&gt;年&#xA0;&#xA0;&#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;日&lt;/p&gt;&lt;/div&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;签名：&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;p&gt;备注：请业主委员会委员（过半数委员）在申请报告“签名”处签名或者加盖合法的业主委员会印章。&lt;/p&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="基本情况表封面">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height:842px; line-height: 1.5"&gt;
+                        &lt;div style="text-align:center; line-height: 5;"&gt;&lt;h2&gt;XX市+data.cantonCode+ （县）业主委员会备案事项变更&lt;/h2&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin: 30px 0"&gt;&lt;h1 style="line-height:2"&gt;基&lt;br /&gt;本&lt;br /&gt;情&lt;br /&gt;况&lt;br /&gt;表&lt;/h1&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin-top: 100px"&gt;
+                        &lt;p&gt;申 报 单 位&lt;span style="text-decoration:underline;"&gt;&#xA0;&#xA0;+data.bodyField0+ &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;
+                        &lt;p&gt;填 报 日 期&lt;span style="text-decoration:underline;"&gt;&#xA0;&#xA0;+data.createTime-date+ &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;
+                        &lt;p&gt;（业主委员会印章）&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin-top:80px"&gt;&lt;p&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;div style="height:842px; line-height: 1.5"&gt;
+                        &lt;div style="text-align:center; line-height: 4"&gt;&lt;h2&gt;说&#xA0;&#xA0;明&lt;/h2&gt;&lt;/div&gt;
+                        &lt;blockquote&gt;
+                        &lt;p&gt;一、适用范围：适用于XX市行政区域内业主委员会备案的有关事项发生变更；&lt;/p&gt;
+                        &lt;p&gt;二、本表由申报备案的业主委员会如实填写，申报人对填写内容的真实性负责；&lt;/p&gt;
+                        &lt;p&gt;三、“业主大会基本情况”中“具有业主大会投票权的业主总人数”按照业主人数统计半路总和计算。
+                        &lt;br /&gt;业主人数，应该按照专有部分的数量计算，一个专有部分按照一人计算。但建设单位尚未出售和虽已出售但未交付的部分，以及同一买受人拥有一个以上专有部分的，按一人计算。&lt;/p&gt;
+                        &lt;p&gt;四、“业主大会基本情况”中“具有业主大会投票权的建筑物总面积”按照专有部分面积的统计总和计算。&lt;/p&gt;
+                        &lt;p&gt;五、本表用蓝色或黑色墨水笔填写，字迹要端正、清楚；也可打印；&lt;/p&gt;
+                        &lt;p&gt;六、填写时，如表格内不够填写，可另加附页，也可适当调整表格大小；&lt;/p&gt;
+                        &lt;p&gt;七、本表统一以 A4 只打印。&lt;/p&gt;
+                        &lt;/blockquote&gt;&lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="修改管理规约、议事规则表决情况">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height:842px"&gt;
+                        &lt;table border="1" height="92%" cellspacing="0" cellpadding="8"&gt;
+                        &lt;tr style="height: 13%;"&gt;
+                        &lt;td colspan="4" align="center"&gt;&lt;strong&gt;修改《管理规约》、《议事规则》表决情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="25%"&gt;业主大会召开时间&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.docBodyJSON.ownerMeeting.oMeetingTime-date+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;业主大会召开地点&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.docBodyJSON.ownerMeeting.oMeetingAddr+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;召开业主大会机构名称&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.docBodyJSON.ownerMeeting.oMeetingOrgName+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;具有业主大会投票权的业主总人数&lt;/td&gt;
+                        &lt;td width="25%" align="right"&gt;+data.docBodyJSON.ownerMeeting.voteTotalNum+  人&lt;/td&gt;
+                        &lt;td width="25%"&gt;具有业主大会投票权的建筑物总面积&lt;/td&gt;
+                        &lt;td width="25%" align="right"&gt;+data.docBodyJSON.ownerMeeting.voteTotalArea+  ㎡;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;同意《管理规约》的业主人数&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeProtocolNum+  人&lt;/td&gt;
+                        &lt;td&gt;同意《管理规约》的业主人数占总人数百分比&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeProtocolNumRatio+  %&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;同意《管理规约》的业主专有部分面积&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeProtocolArea+  ㎡;&lt;/td&gt;
+                        &lt;td&gt;同意《管理规约》的业主专有部分面积占建筑物总面积百分比&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeProtocolAreaRatio+  %&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;同意《议事规则》的业主人数&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeRuleNum+  人&lt;/td&gt;
+                        &lt;td&gt;同意《议事规则》的业主人数占总总人数百分比&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeRuleNumRatio+  %&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;同意《议事规则》的业主专有部分面积&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeRuleArea+  ㎡;&lt;/td&gt;
+                        &lt;td&gt;同意《议事规则》的业主专有部分面积占建筑物总面积百分比&lt;/td&gt;
+                        &lt;td align="right"&gt;+data.docBodyJSON.ownerMeeting.agreeRuleAreaRatio+  %&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/table&gt;
+                        &lt;p&gt;备注：1.本页仅在《管理规约》、《议事规则》进行修改后需提供。&lt;/p&gt;
+                        &lt;p&gt;2.业主委员会委员（需过半数委员）在本页空白处签名或加盖合法的业主委员会印章。&lt;/p&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+
+            <item key="业主委员会信息变更情况表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                        &lt;table border="1" height="90%" cellspacing="0" cellpadding="5"&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="5" align="center"&gt;&lt;strong&gt;业主委员会主任或副主任变更基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2" width="25%"&gt;业主委员会任期&lt;/td&gt;
+                        &lt;td colspan="3", width="75%"&gt;+data.docBodyJSON.ownerTeam.FoundedTime-date+ 起，
+                        至 +data.docBodyJSON.ownerTeam.ExpirationTime-date+ 止&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2"&gt;变更后主任姓名&lt;/td&gt;
+                        &lt;td width="25%"&gt;&#xA0;+data.docBodyJSON.ownerTeam.MasterName+ &lt;/td&gt;
+                        &lt;td width="25%"&gt;联系电话&lt;/td&gt;
+                        &lt;td width="25%"&gt;&#xA0;+data.docBodyJSON.ownerTeam.MasterTel+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2"&gt;变更后副主任姓名&lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.docBodyJSON.ownerTeam.DeputyDirectorName+ &lt;/td&gt;
+                        &lt;td&gt;联系电话&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2"&gt;变更后副主任姓名&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;td&gt;联系电话&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="5" align="center"&gt;&lt;strong&gt;选举业主委员会主任或副主任基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="15%"&gt;主任姓名&lt;/td&gt;
+                        &lt;td width="10%"&gt;&#xA0;+data.docBodyJSON.ownerTeam.MasterName+ &lt;/td&gt;
+                        &lt;td colspan="2"&gt;同意业主委员会委员人数站委员总人数百分比&lt;/td&gt;
+                    </item>
+                    <item name="name2" matchIndex="1"  match2DataValue="data.docBodyJSON.ownerTeam.MasterName"
+                          matchListData="data.docBodyJSON.currentMembers"  matchListDataKey="name">
+                        &lt;td&gt;&#xA0;+data.agreeChgeNumRatio+ &lt;/td&gt;
+                    </item>
+                    <item name="name3">
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;副主任姓名&lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.docBodyJSON.ownerTeam.DeputyDirectorName+ &lt;/td&gt;
+                        &lt;td colspan="2"&gt;同意业主委员会委员人数站委员总人数百分比&lt;/td&gt;
+                    </item>
+                    <item name="name4"   matchIndex="3"  match2DataValue="data.docBodyJSON.ownerTeam.DeputyDirectorName"
+                          matchListData="data.docBodyJSON.currentMembers"  matchListDataKey="name">
+                        &lt;td&gt;&#xA0; +data.agreeChgeNumRatio+ &lt;/td&gt;
+                    </item>
+                    <item name="name5">
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;副主任姓名&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;td colspan="2"&gt;同意业主委员会委员人数站委员总人数百分比&lt;/td&gt;
+                        &lt;td&gt;&#xA0;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr height="10%"&gt;
+                        &lt;td colspan="2"&gt;原业主委员会主任或者副主任不再履行职务的简要原因&lt;/td&gt;
+                    </item>
+                    <item name="name6" cycle="true"  footIndex="5"
+                          cycleData="data.docBodyJSON.shutMembers" cycleMatchKey="duty"  cycleMacthValue="e-1,2">
+                        &lt;td colspan="3"&gt;&#xA0; +data.chgeReason+ &lt;/td&gt;
+                    </item>
+                    <item  name="name7">
+                        &lt;/tr&gt;  &lt;tr&gt;
+                        &lt;td colspan="5" align="center"&gt;&lt;strong&gt;业主委员会委员职务终止情况&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+                    </item>
+                    <item name="name8" cycle="true" footIndex="7" cycleData="data.docBodyJSON.shutMembers">
+                        &lt;tr&gt;
+                        &lt;td&gt;终止职务委员姓名&lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.name+ &lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0; +data.chgeReason+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name9">
+                        &lt;tr&gt;
+                        &lt;td colspan="5" align="center"&gt;&lt;strong&gt;候补委员递补为业委会委员情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name10" cycle="true" footIndex="9" cycleData="data.docBodyJSON.growMembers"
+                          cycleMatchKey="duty" cycleMacthValue="e-3">
+                        &lt;tr&gt;
+                        &lt;td colspan="2"&gt;候补委员递补委员姓名&lt;/td&gt;
+                        &lt;td colspan="3"&gt;&#xA0;+data.name+&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name11">
+                        &lt;/table&gt;
+                        &lt;div&gt; &lt;p&gt;备注：1.本页仅在召开业主委员会会议重新选举主任或者副主任、业主委员会委员符合《广东省物业管理条例》第三十一条规定自行终止其职务的，以及业主委员会委员职务终止后由候补委员递补味业委会委员后需提供。&lt;/p&gt;
+                        &lt;p&gt;2.业主委员会委员（需过半数委员）在本页空白处签名或加盖合法的业主委员会印章。&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="委员表决情况">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                        &lt;table border="1" width="100%" height="90%" cellspacing="0" cellpadding="10"&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="3" style="text-align: center"&gt;新当选业主委员会委员表决情况&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="15%"&gt;姓名&lt;/td&gt;
+                        &lt;td width="35%"&gt;同意的业主人数占总人数百分比&lt;/td&gt;
+                        &lt;td width="50%"&gt;同意的业主专有部分面积占总建筑面积百分比&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name2" cycle="true" footIndex="1" cycleData="data.docBodyJSON.newMembers">
+                        &lt;tr&gt;
+                        &lt;td&gt;&#xA0;+data.name+&lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.agreeNumRatio+%&lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.agreeAreaRatio+%&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name3">
+                        &lt;tr&gt;
+                        &lt;td colspan="3" style="text-align: center"&gt;经业主大会决定终止原业主委员会委员职务的表决情况&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;姓名&lt;/td&gt;
+                        &lt;td&gt;同意的业主人数占总人数百分比&lt;/td&gt;
+                        &lt;td&gt;同意的业主专有部分面积占总建筑面积百分比&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name4" cycle="true" cycleData="data.docBodyJSON.shutMembers" footIndex="3">
+                        &lt;tr&gt;
+                        &lt;td&gt;&#xA0;+data.name+&lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.agreeNumRatio+%&lt;/td&gt;
+                        &lt;td&gt;&#xA0;+data.agreeAreaRatio+%&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name5">
+                        &lt;/table&gt;
+                        &lt;div&gt;
+                        &lt;p&gt;备注：1.本页仅在召开业主大会会议决定更换任期内的业主委员会委员时需提供。&lt;/p&gt;
+                        &lt;p&gt;2.业主委员会委员（需过半数委员）在本页空白处签名或加盖合法的业主委员会印章。&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="委员基本情况">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                        &lt;table width="100%" border="1" cellspacing="0"&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="8" align="center"&gt;&lt;strong&gt;变更后业主委员会全体委员基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr align="center"&gt;
+                        &lt;td&gt;姓名&lt;/td&gt;
+                        &lt;td&gt;委员会职务&lt;/td&gt;
+                        &lt;td&gt;性别&lt;/td&gt;
+                        &lt;td&gt;年龄&lt;/td&gt;
+                        &lt;td&gt;政治面貌&lt;/td&gt;
+                        &lt;td&gt;工作单位&lt;/td&gt;
+                        &lt;td&gt;家庭住址&lt;/td&gt;
+                        &lt;td&gt;联系电话&lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name2" cycle="true" footIndex="1" cycleData="data.docBodyJSON.currentMembers" cycleMatchKey="memberType" cycleMacthValue="e-1">
+                        &lt;tr&gt;
+                        &lt;td&gt;&#xA0; +data.name+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.duty-EnumDuty+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.sex-EnumSex+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.age+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.politicalStatus-EnumPol+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.workUnit+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.address+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.tel+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name3">
+                        &lt;tr&gt;
+                        &lt;td colspan="8" align="center"&gt;&lt;strong&gt;变更后业主委员会全体候补委员基本情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td align="center"&gt;姓名&lt;/td&gt;
+                        &lt;td align="center"&gt;性别&lt;/td&gt;
+                        &lt;td colspan="2" align="center"&gt;年龄&lt;/td&gt;
+                        &lt;td align="center"&gt;政治面貌&lt;/td&gt;
+                        &lt;td align="center"&gt;工作单位&lt;/td&gt;
+                        &lt;td align="center"&gt;家庭住址&lt;/td&gt;
+                        &lt;td align="center"&gt;联系电话&lt;/td&gt;
+                        &lt;/tr&gt;</item>
+                    <item name="name4" cycle="true" footIndex="3" cycleData="data.docBodyJSON.currentMembers" cycleMatchKey="memberType" cycleMacthValue="e-2">
+                        &lt;tr&gt;
+                        &lt;td&gt;&#xA0; +data.name+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.duty-EnumDuty+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.sex-EnumSex+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.age+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.politicalStatus-EnumPol+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.workUnit+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.address+ &lt;/td&gt;
+                        &lt;td&gt;&#xA0; +data.tel+ &lt;/td&gt;
+                        &lt;/tr&gt;
+                    </item>
+                    <item name="name5">
+                        &lt;/table&gt;
+                        &lt;div&gt;
+                        &lt;p&gt;备注：1.本页仅在任期内的业主委员交安会委员和候补委员的职务或者人数发生变更后需提供。&lt;/p&gt;
+                        &lt;p&gt;2.业主委员会委员（需过半数委员）在本页空白处签名或加盖合法的业主委员会印章。&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+
+            <item key="备案要件">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height:842px; line-height: 1.5"&gt;
+                        &lt;table height="90%" border="1" cellspacing="0" cellpadding="10"&gt;
+                        &lt;tr align="center"&gt;
+                        &lt;td colspan="2"&gt;&lt;strong&gt;备案事项变更要件情况&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="30%"&gt;业主委员会备案事项变更申报表&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;业主委员会备案事项变更基本情况表&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;业主委员会的会议记录的会议决定&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;业主大会的会议记录的会议决定（经业主大会会议决定变更的需提供）&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;管理规约（修改了《管理规约》的需提供）&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td&gt;业主大会议事规则（修改了《业主大会议事规则》的需提供）&lt;/td&gt;
+                        &lt;td&gt;______符合法定形式&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td colspan="2" align="center"&gt;&lt;strong&gt;备案意见&lt;/strong&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr style="height: 30%;"&gt;
+                        &lt;td&gt;备案实施机关意见&lt;/td&gt;
+                        &lt;td align="center" valign="bottom"&gt;签字：&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0;&#xA0;&#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;日&lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt;业主委员会备案事项变更回执文号及备案时间&lt;/td&gt;
+                        &lt;td align="center"&gt;
+                        &lt;p&gt;_________物业备变更 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;
+                        &lt;p&gt;备案时间：&#xA0;&#xA0;&#xA0;&#xA0;年&#xA0;&#xA0;&#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;日&lt;/p&gt;
+                        &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/table&gt;
+                        &lt;div&gt; &lt;p style="float: left"&gt;备注：&lt;/p&gt;
+                        &lt;ol style="float: left"&gt;
+                        &lt;li&gt;本页由备案登记机关填写，字迹工整，如实填写，不得涂改；&lt;/li&gt;
+                        &lt;li&gt;备案要件情况的下划线处填写“是”或者“不”。&lt;/li&gt;
+                        &lt;/ol&gt;
+                        &lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="备案信息表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div&gt;
+                        &lt;table border="1" cellspacing="0" cellpadding="5" width="100%" height="95%"&gt;
+                        &lt;tr&gt;
+                        &lt;td width="103" align="center" valign="middle"&gt;&lt;p align="center"&gt;&#xA0;&lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="465" align="center" valign="middle"&gt;&lt;p align="center"&gt;业主委员会换届备案流程 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="103" align="center" valign="middle"&gt;&lt;p align="center"&gt;办理依据 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="465"&gt;&lt;p&gt;1、《物业管理条例》&lt;br /&gt;2、《业主大会和业主委员会指导规则》 &lt;br /&gt;
+                        3、《广东省物业管理条例》 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="103" align="center" valign="middle"&gt;&lt;p align="center"&gt;申请材料 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="465" valign="top"&gt;&lt;p&gt;（1） 备案申请书； &lt;br /&gt;
+                        （2） 街道办事处批复； &lt;br /&gt;
+                        （3） 新一届的业主委员会成员基本情况表和房产证（或购房合同）、身份证复印件及承诺书； &lt;br /&gt;
+                        （4） 投票结果统计表（由街道办签名并盖章确认）； &lt;br /&gt;
+                        （5） 表决修改后的《管理规约》、《业主大会议事规则》。&lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="103" align="center" valign="middle"&gt;&lt;p align="center"&gt;办理部门 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="465" align="center" valign="middle"&gt;&lt;p&gt;物管中心 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="103" align="center" valign="middle"&gt;&lt;p align="center"&gt;办结时限 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="465" align="center" valign="middle"&gt;&lt;p align="center"&gt;5个工作日内（公示日除外） &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="103" align="center" valign="middle"&gt;&lt;p align="center"&gt;工作流程及责任岗位 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="465" valign="top"&gt;&lt;p&gt;收件（行政服务中心1天）→审核材料（物管中心2天）→小区（公示5个工作日）→审批（物管中心负责人1天）→发备案通知书（行政服务中心1天）
+                        &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="103" align="center" valign="middle"&gt;&lt;p align="center"&gt;备注 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="465" valign="top"&gt;&lt;p&gt;复印件须提供原件核对，在标注&quot;此复印件与原件相符，所提供资料真实、有效&quot;字样上盖备案单位公章
+                        &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                        &lt;td width="103" align="center" valign="middle"&gt;&lt;p align="center"&gt;收费情况 &lt;/p&gt;&lt;/td&gt;
+                        &lt;td width="465" align="center" valign="middle"&gt;&lt;p align="center"&gt;无 &lt;/p&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/table&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item  key="备案回执">
+            <item key="XX版本">
+                <item name="1">
+                    &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                    &lt;div style="text-align:right;"&gt;&lt;p style="line-height:2; margin-right:30px;"&gt;______物业备变更 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:center; line-height: 5"&gt;&lt;h2&gt;业主委员会备案事项变更回执&lt;/h2&gt;&lt;/div&gt;
+                    &lt;p&gt;&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;+data.bodyField0+ &#xA0;&#xA0;&lt;/span&gt;：&lt;/p&gt;
+                    &lt;p style="text-indent:2em;"&gt;你会提交的业主委员会备案事项&lt;span style="text-decoration:underline"&gt;（原业委会备案回执号）&lt;/span&gt;变更材料收悉。备案主要内容如下：&lt;/p&gt;
+                    &lt;ol&gt;
+                    &lt;li&gt;______________________________________________________&lt;/li&gt;
+                    &lt;li&gt;______________________________________________________&lt;/li&gt;
+                    &lt;li&gt;______________________________________________________&lt;/li&gt;
+                    &lt;/ol&gt;
+                    &lt;div style="text-align:right; margin-top: 200px"&gt;&lt;p&gt;+data.date-dateNow+&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:right;"&gt;&lt;p&gt;（备案机关印章）&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:center; margin-top: 50px"&gt;&lt;p&gt;收件人签章：_________ 时间:______年___月___日&lt;/p&gt;&lt;/div&gt;
+                    &lt;div&gt;
+                    &lt;p&gt;备注：1.一式叁份，申请单位留存一份，备案机关留存两份；&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;/div&gt;
+                </item>
+            </item>
+        </item>
+    </item>
+
+    <item   key="11" disc="业主委员会会议决定事项备案"> 
+        <item key="审批文件列表">
+            <item key="XX版本">
+                <item name="name1">审批文件列表情况</item>
+                <item name="name2">业主委员会会议决定事项备案申报表</item>
+                <item name="name3">业主委员会的会议记录和会议决定</item>
+            </item>
+        </item>
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">申报表</item>
+                <item name="name2" pageNum="1" copies="1" jsonRoot="false">申请报告</item>
+                <item name="name3" pageNum="1" copies="1" jsonRoot="false">备案要件</item>
+                <item name="name4" pageNum="1" copies="1" jsonRoot="false">回执</item>
+            </item>
+            <item key="XX版本">
+                <item name="name1">备案信息表</item>
+                <item name="name2">成员信息表</item>
+            </item>
+        </item>
+        <item key="备案申报表">
+            <item key="申报表">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height: 842px; line-height: 1.5;"&gt;
+                        &lt;div style="text-align:right;"&gt;&lt;p style="line-height:4; margin-right:30px;"&gt;______物业决定备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;&lt;h2 style="line-height: 5"&gt;XX市+data.cantonCode+（县）业主委员会会议决定事项备案&lt;/h2&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;margin: 30px 0;"&gt;&lt;h1 style="line-height:3"&gt;申&lt;br /&gt;报&lt;br /&gt;表&lt;/h1&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center; margin-top: 100px;"&gt;
+                        &lt;p&gt;申 报 单 位&lt;span style="text-decoration:underline"&gt;&#xA0;&#xA0; data.bodyField0 + &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;
+                        &lt;p&gt;填 报 日 期&lt;span style="text-decoration:underline"&gt;&#xA0;&#xA0; data.createTime-date+ &#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;"&gt;&lt;p&gt;（有合法业主委员会印章的加盖）&lt;/p&gt;&lt;/div&gt;
+                        &lt;div style="text-align:center;margin-top: 80px;"&gt;&lt;p&gt;XX市住房和城乡建设委员会印制&lt;/p&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    </item>
+                    <item name="name2">
+                        &lt;div style="height:842px; line-height: 1.5"&gt;
+                        &lt;div style="text-align:center; line-height: 4;"&gt;&lt;h2&gt;说&#xA0;&#xA0;明&lt;/h2&gt;&lt;/div&gt;
+                        &lt;blockquote&gt;
+                        &lt;p&gt;一、适用范围：业主委员会备案的有关事项发生变更的，按照业主委员会备案事项变更的规定办理，其他的业主委员会会议决定事项，由业主委员会申请办理备案；&lt;/p&gt;
+                        &lt;p&gt;二、本表由申报备案的业主委员会如实填写，申报人对填写内容的真实性负责；&lt;/p&gt;
+                        &lt;p&gt;三、本表用蓝色或黑色墨水笔填写，字迹要端正、清楚；也可打印；&lt;/p&gt;
+                        &lt;p&gt;四、填写时，如表格内不够填写，可另加附页，也可适当调整表格大小；&lt;/p&gt;
+                        &lt;p&gt;五、“&lt;span style="text-decoration:underline"&gt;&#xA0;&#xA0;&#xA0;&lt;/span&gt;物业备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号”空白处由备案机关填写；&lt;/p&gt;
+                        &lt;p&gt;六、本表统一以 A4 只打印。&lt;/p&gt;
+                        &lt;/blockquote&gt;   &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="申请报告">
+                <item key="XX版本">
+                    <item name="name1">
+                        &lt;div style="height:842px"&gt;
+                        &lt;div style="border:1px solid #000; height: 92%; padding:10px;"&gt;
+                        &lt;div style="text-align:center; line-height: 4"&gt;&lt;h2&gt;业主委会会议决定事项备案申请报告&lt;/h2&gt;&lt;/div&gt;
+                        &lt;p style="line-height:2;"&gt;__________________街道办事处（镇人民政府）：&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em;"&gt;+data.docBodyJSON.meetingTime-date+，
+                        &lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0; +data.docBodyJSON.ownerTeamName + &#xA0;&#xA0;&lt;/span&gt;
+                        在&lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0; +data.docBodyJSON.eaAreaName + &#xA0;&#xA0;&lt;/span&gt;小区召开业主委员会会议，
+                        &lt;span style="text-decoration:underline"&gt;&#xA0;&#xA0;+data.docBodyJSON.ownerTeamName+&#xA0;&#xA0;&lt;/span&gt;总人数
+                        &lt;span style="text-decoration:underline"&gt;&#xA0;&#xA0;+data.docBodyJSON.shouldNumber+&#xA0;&#xA0;&lt;/span&gt;人，参会人数
+                        &lt;span style="text-decoration: underline"&gt;&#xA0;&#xA0;+data.docBodyJSON.realNumber+&#xA0;&#xA0;&lt;/span&gt;人，会议决定了如下事项：&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;1.&lt;span style="text-decoration:underline"&gt;&#xA0;&#xA0;+data.docBodyJSON.meetingContent+&#xA0;&#xA0;&lt;/span&gt;；&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;会议决定的上述事项均经业主委员会全体委员半数以上同意，现向贵单位提交以下材料申请办理备案：&lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;
+                        &lt;ol&gt;
+                        &lt;li&gt;业主委员会会议决定事项备案申报表；&lt;/li&gt;
+                        &lt;li&gt;业主委员会的会议记录和会议决定。&lt;/li&gt;
+                        &lt;/ol&gt;
+                        &lt;/p&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;专此报告。&lt;/p&gt;
+                        &lt;div style="text-align:right; margin: 80px"&gt;&lt;p style="line-height:2; margin-right:30px;"&gt;年&#xA0;&#xA0;&#xA0;&#xA0;月&#xA0;&#xA0;&#xA0;&#xA0;日&lt;/p&gt;&lt;/div&gt;
+                        &lt;p style="line-height:2; text-indent:2em"&gt;业主委员会委员签名：&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;p&gt;备注：请业主委员会委员（过半数委员）在申请报告“签名”处签名或者加盖合法的业主委员会印章。&lt;/p&gt;
+                        &lt;/div&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item  key="备案回执">
+            <item key="XX版本">
+                <item name="1">
+                    &lt;div style="line-height:1.5; height: 842px;"&gt;
+                    &lt;div style="text-align:right;"&gt;&lt;p style="line-height:2; margin-right:30px;"&gt;______物业决定备 [&#xA0;&#xA0;&#xA0;&#xA0;] 第&#xA0;&#xA0;&#xA0;&#xA0;号&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:center;"&gt;&lt;h2 style="line-height:5; margin-right:30px;"&gt;业主委员会会议决定事项备案回执&lt;/h2&gt;&lt;/div&gt;
+                    &lt;p style="text-decoration:underline"&gt;+data.docBodyJSON.ownerTeamName+：&lt;/p&gt;
+                    &lt;p style="text-indent:2em;"&gt;你会提交的业主委员会会议决定事项备案材料收悉。备案主要内容如下：&lt;/p&gt;
+                    &lt;p style="text-indent:2em;"&gt;1.&lt;span style="text-decoration:underline"&gt;&#xA0;&#xA0;+data.docBodyJSON.meetingContent+&#xA0;&#xA0;&lt;/span&gt;&lt;/p&gt;
+                    &lt;div style="text-align:right; margin-top: 200px"&gt;&lt;p&gt;+data.newDate-dateNow+&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:right;"&gt;&lt;p&gt;（备案机关印章）&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:center; margin-top: 20px;"&gt;&lt;p&gt;收件人签章：_________ 时间:______年___月___日&lt;/p&gt;&lt;/div&gt;
+                    &lt;div style="text-align:center; margin-top:20px;"&gt;
+                    &lt;p&gt;备注：1.一式叁份，申请单位和备案机关各留存一份&lt;/p&gt;     &lt;/div&gt;  &lt;/div&gt;
+                </item>
+            </item>
+        </item>
+    </item>
+
+
+        <item key="打印列表">
+            <item key="XX版本">
+                <!--pageNum 页数 copies 份数-->
+                <item name="name1" pageNum="1" copies="1" jsonRoot="false">资质变更申报表</item>
+                <item name="name2" pageNum="1" copies="1" jsonRoot="false">填表说明</item>
+            </item>
+        </item>
+        <item key="备案申报表">
+            <item key="资质变更申报表">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;body&gt;
+                            &lt;p align="right"&gt;          &lt;/p&gt;
+                            &lt;p align="right"&gt; 编号:+data.docCode+&lt;/p&gt;
+                            &lt;p align="center"&gt;&#xA0;&lt;/p&gt;
+                            &lt;p align="center"&gt;&#xA0;&lt;/p&gt;
+                            &lt;p align="center"&gt;物业服务企业资质变更申报表&lt;strong&gt; &lt;/strong&gt;&lt;/p&gt;
+                            &lt;p align="center"&gt;&#xA0;&lt;/p&gt;
+                            &lt;p align="center"&gt;&#xA0;&lt;/p&gt;
+                            &lt;p align="center"&gt;&#xA0;&lt;/p&gt;
+                            &lt;p align="center"&gt;&#xA0;&lt;/p&gt;
+                            &lt;p align="center"&gt;&#xA0;&lt;/p&gt;
+                            &lt;p align="center"&gt;&#xA0;&lt;/p&gt;
+                            &lt;p&gt;&#xA0;&lt;/p&gt;
+                            &lt;p&gt;&#xA0;&lt;/p&gt;
+                            &lt;div align="center"&gt;
+                                &lt;table border="0" cellspacing="0" cellpadding="0"&gt;
+                                    &lt;tr&gt;
+                                        &lt;td width="125" valign="top"&gt;&lt;p align="center"&gt;申报企业 &lt;/p&gt;&lt;/td&gt;
+                                        &lt;td width="170" valign="top"&gt;&lt;p&gt;&lt;u&gt;+data.realtyMgeCom.OrgName+&lt;/u&gt;&lt;/p&gt;&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                    &lt;tr&gt;
+                                        &lt;td width="125" valign="top"&gt;&lt;p align="center"&gt;企业资质等级 &lt;/p&gt;&lt;/td&gt;
+                                        &lt;td width="170" valign="top"&gt;&lt;p&gt;&lt;u&gt;+data.realtyMgeCom.LicenseLevel+&lt;/u&gt;&lt;/p&gt;&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                    &lt;tr&gt;
+                                        &lt;td width="125" valign="top"&gt;&lt;p align="center"&gt;申报时间 &lt;/p&gt;&lt;/td&gt;
+                                        &lt;td width="170" valign="top"&gt;&lt;p&gt;&lt;u&gt;+data.createTime-date+&lt;/u&gt;&lt;/p&gt;&lt;/td&gt;
+                                    &lt;/tr&gt;
+                                &lt;/table&gt;
+                            &lt;/div&gt;
+                            &lt;p style="text-align:right"&gt;（公章） &lt;br /&gt;
+                            &lt;/p&gt;
+                            &lt;p&gt;&#xA0;&lt;/p&gt;
+                            &lt;p&gt;&#xA0;&lt;/p&gt;
+                        &lt;/body&gt;
+                    </item>
+                </item>
+            </item>
+            <item key="资质变更申报表">
+                <item key="XX版本">
+                    <item name="name1" >
+                        &lt;body&gt;
+                            &lt;pre&gt;                                                      填表说明&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;
+                        一、适应范围：仅适用新设立物业服务企业、核定物业服务企业、延续物业服务企业；&lt;br /&gt;&lt;br /&gt;
+                        二、本表由申报资质的物业服务企业如实填写，申报企业对填写内容的真实性负责。&lt;br /&gt;&lt;br /&gt;
+                        三、本表用蓝色或黑色墨水填写，字迹要端正、清楚；也可打印。&lt;br /&gt;&lt;br /&gt;
+                        四、企业填写时，如表格内不够填写，可另加附页，也可适当调整表格大小。&lt;br /&gt;&lt;br /&gt;
+                        五、管理人员应是正式调入该企业或企业聘用的专职专业技术人员。&lt;br /&gt;&lt;br /&gt;
+                        六、住宅小区(大厦)的地址要写明所属的行政区。&lt;br /&gt;&lt;br /&gt;
+                        七、申报资质的物业服务企业报送本表的同时，应将物业服务企业的情况，通过网络登陆填报的方式（http://gzwy.laho.gov.cn:8080），输入XX市物业管理服务信用信息系统。&lt;br /&gt;
+                        八、申报资质的物业服务企业应保证网上填报的数据与纸张报送的资料相一致，纸张报送的材料与网上填报的数据经资质审批部门审核后，申报资质的物业服务企业凭通知领取《物业服务企业资质证书》&lt;br /&gt;
+                        九、本表由申报资质的物业服务企业提交相应的资质审批部门，有关资质条件的证明材料应随本表附送。&lt;br /&gt;&lt;br /&gt;
+                        十、本表可通过信息网下载，统一以A4纸打印。&lt;br /&gt;
+                            &lt;/pre&gt;
+                            &lt;p align="right"&gt;&#xA0;&lt;/p&gt;
+                        &lt;/body&gt;
+                    </item>
+                </item>
+            </item>
+        </item>
+        <item  key="备案回执">
+            <item key="XX版本">
+                <item name="1">
+
+                </item>
+            </item>
+        </item>
+    </item>
+</Root>
